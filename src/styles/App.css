@@ -1,0 +1,18 @@
+#App {
+  height: 100%;
+  width: 100%;
+  display: grid;
+}
+
+.homepage {
+  display: flex;
+}
+
+.homepageImgWrapper {
+  height: 350px;
+  width: 350px;
+}
+
+.homepageImgWrapper img {
+  max-width: 100%;
+}
