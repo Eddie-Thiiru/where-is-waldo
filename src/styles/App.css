@@ -16,4 +16,13 @@
 
 .homepageImgWrapper img {
   max-width: 100%;
+  pointer-events: none;
+}
+
+.homepageImgWrapper h2 {
+  pointer-events: none;
+}
+
+.worldImgWrapper img {
+  max-width: 100%;
 }

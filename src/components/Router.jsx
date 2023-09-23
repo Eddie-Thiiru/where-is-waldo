@@ -7,10 +7,11 @@ const Router = () => {
     {
       path: "/",
       element: <App />,
-      children: [
-        { index: true, element: <Homepage /> },
-        { path: "home", element: <Homepage /> },
-      ],
+      children: [{ path: "home", element: <Homepage /> }],
+    },
+    {
+      path: "/:name",
+      element: <App />,
     },
   ]);
 
