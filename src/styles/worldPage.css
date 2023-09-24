@@ -1,0 +1,11 @@
+.worldImgWrapper {
+  position: relative;
+}
+
+.popup {
+  position: absolute;
+}
+
+.worldImgWrapper img {
+  max-width: 100%;
+}

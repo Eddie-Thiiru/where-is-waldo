@@ -5,6 +5,7 @@ import WorldOne from "./components/WorldOne";
 import WorldTwo from "./components/WorldTwo";
 import WorldThree from "./components/WorldThree";
 import "./styles/App.css";
+import "./styles/worldPage.css";
 
 function App() {
   const { name } = useParams();
