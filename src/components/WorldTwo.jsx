@@ -1,6 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Img2 from "../images/ISOrd & ISOrcery.png";
+import gandalfImg from "../images/gandalf.png";
+import shrekImg from "../images/shrek.png";
+import genieImg from "../images/genie.png";
 
 const Popup = ({ xPosition, yPosition }) => {
   return (
@@ -9,15 +12,15 @@ const Popup = ({ xPosition, yPosition }) => {
       style={{ top: `${yPosition}px`, left: `${xPosition}px` }}
     >
       <div className="popupCharacter">
-        <img src="" alt="" />
+        <img src={gandalfImg} alt="" />
         <h4>Gandalf</h4>
       </div>
       <div className="popupCharacter">
-        <img src="" alt="" />
+        <img src={shrekImg} alt="" />
         <h4>Shrek</h4>
       </div>
       <div className="popupCharacter">
-        <img src="" alt="" />
+        <img src={genieImg} alt="" />
         <h4>Genie</h4>
       </div>
     </div>
@@ -43,7 +46,7 @@ const WorldTwo = () => {
     }
 
     if (y + 150 > height) {
-      let diff = y + 150 - height;
+      let diff = y + 180 - height;
       y -= diff;
     }
 

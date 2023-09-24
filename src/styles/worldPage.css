@@ -3,14 +3,24 @@
 }
 
 .popup {
-  height: 150px;
+  height: 180px;
   width: 150px;
   position: absolute;
   background-color: rgba(255, 240, 245, 0.5);
 }
 
+.popupCharacter {
+  display: flex;
+}
+
 .worldImgWrapper img {
   max-width: 100%;
+}
+
+.popupCharacter img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
 }
 
 .popupCharacter:hover {
