@@ -12,3 +12,7 @@
 .worldImgWrapper img {
   max-width: 100%;
 }
+
+.popupCharacter:hover {
+  background-color: rgba(255, 164, 194, 0.8);
+}

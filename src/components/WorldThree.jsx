@@ -8,22 +8,18 @@ const Popup = ({ xPosition, yPosition }) => {
       className="popup"
       style={{ top: `${yPosition}px`, left: `${xPosition}px` }}
     >
-      <form className="popupForm">
-        <fieldset>
-          <div>
-            <input type="radio" id="waldo" name="character" value="waldo" />
-            <label htmlFor="waldo">Waldo</label>
-          </div>
-          <div>
-            <input type="radio" id="rick" name="character" value="rick" />
-            <label htmlFor="rick">Rick</label>
-          </div>
-          <div>
-            <input type="radio" id="ed" name="character" value="ed" />
-            <label htmlFor="ed">Ed</label>
-          </div>
-        </fieldset>
-      </form>
+      <div className="popupCharacter">
+        <img src="" alt="" />
+        <h4>Waldo</h4>
+      </div>
+      <div className="popupCharacter">
+        <img src="" alt="" />
+        <h4>Rick</h4>
+      </div>
+      <div className="popupCharacter">
+        <img src="" alt="" />
+        <h4>Ed</h4>
+      </div>
     </div>
   );
 };
