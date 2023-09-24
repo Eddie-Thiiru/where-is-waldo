@@ -41,8 +41,20 @@ const WorldOne = () => {
   });
 
   const handleImgClick = (e) => {
+    let height = e.target.clientHeight;
+    let width = e.target.clientWidth;
     let x = e.nativeEvent.offsetX;
     let y = e.nativeEvent.offsetY;
+
+    if (x + 150 > width) {
+      let diff = x + 150 - width;
+      x -= diff;
+    }
+
+    if (y + 150 > height) {
+      let diff = y + 150 - height;
+      y -= diff;
+    }
 
     setModal({
       active: true,
