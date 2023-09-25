@@ -1,17 +1,11 @@
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Characters from "./Characters";
+import useWorldState from "./utils/useWorldState";
 
 import Img3 from "../images/memesupreme.jpg";
 import waldoImg from "../images/waldo.png";
 import rickImg from "../images/rick.png";
 import edImg from "../images/ed.png";
-
-const data = {
-  waldo: 1,
-  rick: 2,
-  ed: 3,
-};
 
 const Popup = ({
   xPosition,
@@ -56,117 +50,14 @@ const Popup = ({
 };
 
 const WorldThree = () => {
-  const [modal, setModal] = useState({
-    active: false,
-    xPosition: 0,
-    yPosition: 0,
-    heightExceeded: false,
-    widthExceeded: false,
-  });
-  const [feedback, setFeedBack] = useState({
-    wrongAnswer: false,
-    correctAnswer: { status: false, name: "" },
-  });
-  const [marker, setMarker] = useState({
-    waldo: { status: "hidden", xPosition: 0, yPosition: 0 },
-    rick: { status: "hidden", xPosition: 0, yPosition: 0 },
-    ed: { status: "hidden", xPosition: 0, yPosition: 0 },
-  });
-
-  useEffect(() => {
-    // Remove feedback popup after timeout
-    const timeout = setTimeout(() => {
-      setFeedBack({
-        wrongAnswer: false,
-        correctAnswer: { status: false, name: "" },
-      });
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [feedback]);
-
-  const handleImgClick = (e) => {
-    if (modal.active) {
-      resetModalState();
-      return;
-    }
-
-    let height = e.target.clientHeight;
-    let width = e.target.clientWidth;
-    let x = e.nativeEvent.offsetX;
-    let y = e.nativeEvent.offsetY;
-    let xExceeded = false;
-    let yExceeded = false;
-
-    // if width of modal exceeds image edge
-    if (x + 200 > width) {
-      // Change modal position by subtracting from it's X coordinate value.
-      x -= 160;
-      xExceeded = true;
-
-      if (x + 200 > width) x -= 20;
-    }
-
-    // if height of modal exceeds image edge
-    if (y + 180 > height) {
-      // Change modal position by subtracting from it's Y coordinate value.
-      y -= 140;
-      yExceeded = true;
-
-      if (y + 200 > height) y -= 20;
-    }
-
-    /* 
-      Also subtract X and Y positions by half of the Target Box's dimensions to
-      ensure that the clicked position is centered within the Target Box.
-    */
-    if (y - 20 > 0) y -= 20;
-    if (x - 20 > 0) x -= 20;
-
-    setModal({
-      active: true,
-      xPosition: x,
-      yPosition: y,
-      heightExceeded: yExceeded,
-      widthExceeded: xExceeded,
-    });
-  };
-
-  const handlePopupClick = (e) => {
-    const characterName = e.target.id.toLowerCase();
-
-    if (data[characterName] === 1) {
-      setFeedBack({
-        wrongAnswer: false,
-        correctAnswer: { status: true, name: characterName },
-      });
-
-      setMarker({
-        ...marker,
-        [characterName]: {
-          status: "visible",
-          xPosition: modal.xPosition,
-          yPosition: modal.yPosition,
-        },
-      });
-    } else {
-      setFeedBack({
-        wrongAnswer: true,
-        correctAnswer: { status: false, name: "" },
-      });
-    }
-  };
-
-  // Reset to default
-  const resetModalState = () => {
-    setModal({
-      active: false,
-      xPosition: 0,
-      yPosition: 0,
-      heightExceeded: false,
-      widthExceeded: false,
-    });
-  };
+  const [
+    modal,
+    feedback,
+    marker,
+    handleImgClick,
+    handlePopupClick,
+    resetModalState,
+  ] = useWorldState();
 
   return (
     <div className="worldThreePage">
@@ -194,28 +85,28 @@ const WorldThree = () => {
           />
         )}
         <div
-          className={marker.waldo.status}
+          className={marker.one.status}
           style={{
-            top: `${marker.waldo.yPosition}px`,
-            left: `${marker.waldo.xPosition}px`,
+            top: `${marker.one.yPosition}px`,
+            left: `${marker.one.xPosition}px`,
           }}
         >
           Here
         </div>
         <div
-          className={marker.rick.status}
+          className={marker.two.status}
           style={{
-            top: `${marker.rick.yPosition}px`,
-            left: `${marker.rick.xPosition}px`,
+            top: `${marker.two.yPosition}px`,
+            left: `${marker.two.xPosition}px`,
           }}
         >
           Here
         </div>
         <div
-          className={marker.ed.status}
+          className={marker.three.status}
           style={{
-            top: `${marker.ed.yPosition}px`,
-            left: `${marker.ed.xPosition}px`,
+            top: `${marker.three.yPosition}px`,
+            left: `${marker.three.xPosition}px`,
           }}
         >
           Here

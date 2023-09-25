@@ -8,15 +8,27 @@ const Characters = ({
 }) => {
   return (
     <>
-      <div className="character" id={characterOne.name} onClick={handleClick}>
+      <div
+        className="character one"
+        id={characterOne.name}
+        onClick={handleClick}
+      >
         <img src={characterOne.image} alt="" />
         <h4>{characterOne.name}</h4>
       </div>
-      <div className="character" id={characterTwo.name} onClick={handleClick}>
+      <div
+        className="character two"
+        id={characterTwo.name}
+        onClick={handleClick}
+      >
         <img src={characterTwo.image} alt="" />
         <h4>{characterTwo.name}</h4>
       </div>
-      <div className="character" id={characterThree.name} onClick={handleClick}>
+      <div
+        className="character three"
+        id={characterThree.name}
+        onClick={handleClick}
+      >
         <img src={characterThree.image} alt="" />
         <h4>{characterThree.name}</h4>
       </div>
