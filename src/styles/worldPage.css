@@ -41,6 +41,15 @@
   background-color: red;
 }
 
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: visible;
+  position: absolute;
+}
+
 .worldImgWrapper img {
   max-width: 100%;
 }

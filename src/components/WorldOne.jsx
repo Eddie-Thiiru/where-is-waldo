@@ -13,6 +13,12 @@ const data = {
   crono: 3,
 };
 
+const characterData = [
+  { name: "Mario", image: marioImg },
+  { name: "Blastoise", image: blastoiseImg },
+  { name: "Crono", image: cronoImg },
+];
+
 const Popup = ({
   xPosition,
   yPosition,
@@ -66,6 +72,12 @@ const WorldOne = () => {
   const [feedback, setFeedBack] = useState({
     wrongAnswer: false,
     correctAnswer: { status: false, name: "" },
+  });
+
+  const [marker, setMarker] = useState({
+    mario: { status: "hidden", xPosition: 0, yPosition: 0 },
+    blastoise: { status: "hidden", xPosition: 0, yPosition: 0 },
+    crono: { status: "hidden", xPosition: 0, yPosition: 0 },
   });
 
   useEffect(() => {
@@ -131,10 +143,18 @@ const WorldOne = () => {
     const characterName = e.target.id.toLowerCase();
 
     if (data[characterName] === 1) {
-      console.log("correct");
       setFeedBack({
         wrongAnswer: false,
         correctAnswer: { status: true, name: characterName },
+      });
+
+      setMarker({
+        ...marker,
+        [characterName]: {
+          status: "visible",
+          xPosition: modal.xPosition,
+          yPosition: modal.yPosition,
+        },
       });
     } else {
       setFeedBack({
@@ -180,6 +200,33 @@ const WorldOne = () => {
             handleContainerClick={resetModalState}
           />
         )}
+        <div
+          className={marker.mario.status}
+          style={{
+            top: `${marker.mario.yPosition}px`,
+            left: `${marker.mario.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.blastoise.status}
+          style={{
+            top: `${marker.blastoise.yPosition}px`,
+            left: `${marker.blastoise.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.crono.status}
+          style={{
+            top: `${marker.crono.yPosition}px`,
+            left: `${marker.crono.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
       </div>
     </div>
   );

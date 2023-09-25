@@ -68,6 +68,12 @@ const WorldTwo = () => {
     correctAnswer: { status: false, name: "" },
   });
 
+  const [marker, setMarker] = useState({
+    gandalf: { status: "hidden", xPosition: 0, yPosition: 0 },
+    shrek: { status: "hidden", xPosition: 0, yPosition: 0 },
+    genie: { status: "hidden", xPosition: 0, yPosition: 0 },
+  });
+
   useEffect(() => {
     // Remove feedback popup after timeout
     const timeout = setTimeout(() => {
@@ -131,10 +137,18 @@ const WorldTwo = () => {
     const characterName = e.target.id.toLowerCase();
 
     if (data[characterName] === 1) {
-      console.log("correct");
       setFeedBack({
         wrongAnswer: false,
         correctAnswer: { status: true, name: characterName },
+      });
+
+      setMarker({
+        ...marker,
+        [characterName]: {
+          status: "visible",
+          xPosition: modal.xPosition,
+          yPosition: modal.yPosition,
+        },
       });
     } else {
       setFeedBack({
@@ -180,6 +194,33 @@ const WorldTwo = () => {
             handleContainerClick={resetModalState}
           />
         )}
+        <div
+          className={marker.gandalf.status}
+          style={{
+            top: `${marker.gandalf.yPosition}px`,
+            left: `${marker.gandalf.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.shrek.status}
+          style={{
+            top: `${marker.shrek.yPosition}px`,
+            left: `${marker.shrek.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.genie.status}
+          style={{
+            top: `${marker.genie.yPosition}px`,
+            left: `${marker.genie.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
       </div>
     </div>
   );

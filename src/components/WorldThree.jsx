@@ -67,6 +67,11 @@ const WorldThree = () => {
     wrongAnswer: false,
     correctAnswer: { status: false, name: "" },
   });
+  const [marker, setMarker] = useState({
+    waldo: { status: "hidden", xPosition: 0, yPosition: 0 },
+    rick: { status: "hidden", xPosition: 0, yPosition: 0 },
+    ed: { status: "hidden", xPosition: 0, yPosition: 0 },
+  });
 
   useEffect(() => {
     // Remove feedback popup after timeout
@@ -131,10 +136,18 @@ const WorldThree = () => {
     const characterName = e.target.id.toLowerCase();
 
     if (data[characterName] === 1) {
-      console.log("correct");
       setFeedBack({
         wrongAnswer: false,
         correctAnswer: { status: true, name: characterName },
+      });
+
+      setMarker({
+        ...marker,
+        [characterName]: {
+          status: "visible",
+          xPosition: modal.xPosition,
+          yPosition: modal.yPosition,
+        },
       });
     } else {
       setFeedBack({
@@ -180,6 +193,33 @@ const WorldThree = () => {
             handleContainerClick={resetModalState}
           />
         )}
+        <div
+          className={marker.waldo.status}
+          style={{
+            top: `${marker.waldo.yPosition}px`,
+            left: `${marker.waldo.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.rick.status}
+          style={{
+            top: `${marker.rick.yPosition}px`,
+            left: `${marker.rick.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        <div
+          className={marker.ed.status}
+          style={{
+            top: `${marker.ed.yPosition}px`,
+            left: `${marker.ed.xPosition}px`,
+          }}
+        >
+          Here
+        </div>
       </div>
     </div>
   );
