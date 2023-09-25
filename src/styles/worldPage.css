@@ -24,6 +24,23 @@
   display: flex;
 }
 
+.correctAnswerPopup,
+.wrongAnswerPopup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  color: white;
+  padding: 20px;
+}
+
+.correctAnswerPopup {
+  background-color: green;
+}
+
+.wrongAnswerPopup {
+  background-color: red;
+}
+
 .worldImgWrapper img {
   max-width: 100%;
 }

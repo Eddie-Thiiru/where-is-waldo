@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Characters from "./Characters";
 
@@ -6,6 +6,12 @@ import Img2 from "../images/ISOrd & ISOrcery.png";
 import gandalfImg from "../images/gandalf.png";
 import shrekImg from "../images/shrek.png";
 import genieImg from "../images/genie.png";
+
+const data = {
+  gandalf: 1,
+  shrek: 2,
+  genie: 3,
+};
 
 const Popup = ({
   xPosition,
@@ -57,10 +63,26 @@ const WorldTwo = () => {
     heightExceeded: false,
     widthExceeded: false,
   });
+  const [feedback, setFeedBack] = useState({
+    wrongAnswer: false,
+    correctAnswer: { status: false, name: "" },
+  });
+
+  useEffect(() => {
+    // Remove feedback popup after timeout
+    const timeout = setTimeout(() => {
+      setFeedBack({
+        wrongAnswer: false,
+        correctAnswer: { status: false, name: "" },
+      });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [feedback]);
 
   const handleImgClick = (e) => {
     if (modal.active) {
-      resetState();
+      resetModalState();
       return;
     }
 
@@ -106,11 +128,24 @@ const WorldTwo = () => {
   };
 
   const handlePopupClick = (e) => {
-    console.log(e.target.id);
+    const characterName = e.target.id.toLowerCase();
+
+    if (data[characterName] === 1) {
+      console.log("correct");
+      setFeedBack({
+        wrongAnswer: false,
+        correctAnswer: { status: true, name: characterName },
+      });
+    } else {
+      setFeedBack({
+        wrongAnswer: true,
+        correctAnswer: { status: false, name: "" },
+      });
+    }
   };
 
   // Reset to default
-  const resetState = () => {
+  const resetModalState = () => {
     setModal({
       active: false,
       xPosition: 0,
@@ -124,6 +159,17 @@ const WorldTwo = () => {
     <div className="WorldTwoPage">
       <div className="worldImgWrapper">
         <img src={Img2} alt="ISOrd & ISOrcery Image" onClick={handleImgClick} />
+        {feedback.wrongAnswer === true ? (
+          <div className="wrongAnswerPopup">
+            <p>Try Again!</p>
+          </div>
+        ) : (
+          feedback.correctAnswer.status === true && (
+            <div className="correctAnswerPopup">
+              <p>You found {feedback.correctAnswer.name}!</p>
+            </div>
+          )
+        )}
         {modal.active === true && (
           <Popup
             xPosition={modal.xPosition}
@@ -131,7 +177,7 @@ const WorldTwo = () => {
             heightExceeded={modal.heightExceeded}
             widthExceeded={modal.widthExceeded}
             handleCharacterClick={handlePopupClick}
-            handleContainerClick={resetState}
+            handleContainerClick={resetModalState}
           />
         )}
       </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Characters from "./Characters";
 
@@ -6,6 +6,12 @@ import Img3 from "../images/memesupreme.jpg";
 import waldoImg from "../images/waldo.png";
 import rickImg from "../images/rick.png";
 import edImg from "../images/ed.png";
+
+const data = {
+  waldo: 1,
+  rick: 2,
+  ed: 3,
+};
 
 const Popup = ({
   xPosition,
@@ -57,10 +63,26 @@ const WorldThree = () => {
     heightExceeded: false,
     widthExceeded: false,
   });
+  const [feedback, setFeedBack] = useState({
+    wrongAnswer: false,
+    correctAnswer: { status: false, name: "" },
+  });
+
+  useEffect(() => {
+    // Remove feedback popup after timeout
+    const timeout = setTimeout(() => {
+      setFeedBack({
+        wrongAnswer: false,
+        correctAnswer: { status: false, name: "" },
+      });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [feedback]);
 
   const handleImgClick = (e) => {
     if (modal.active) {
-      resetState();
+      resetModalState();
       return;
     }
 
@@ -106,11 +128,24 @@ const WorldThree = () => {
   };
 
   const handlePopupClick = (e) => {
-    console.log(e.target.id);
+    const characterName = e.target.id.toLowerCase();
+
+    if (data[characterName] === 1) {
+      console.log("correct");
+      setFeedBack({
+        wrongAnswer: false,
+        correctAnswer: { status: true, name: characterName },
+      });
+    } else {
+      setFeedBack({
+        wrongAnswer: true,
+        correctAnswer: { status: false, name: "" },
+      });
+    }
   };
 
   // Reset to default
-  const resetState = () => {
+  const resetModalState = () => {
     setModal({
       active: false,
       xPosition: 0,
@@ -124,6 +159,17 @@ const WorldThree = () => {
     <div className="worldThreePage">
       <div className="worldImgWrapper">
         <img src={Img3} alt="memesupreme Image" onClick={handleImgClick} />
+        {feedback.wrongAnswer === true ? (
+          <div className="wrongAnswerPopup">
+            <p>Try Again!</p>
+          </div>
+        ) : (
+          feedback.correctAnswer.status === true && (
+            <div className="correctAnswerPopup">
+              <p>You found {feedback.correctAnswer.name}!</p>
+            </div>
+          )
+        )}
         {modal.active === true && (
           <Popup
             xPosition={modal.xPosition}
@@ -131,7 +177,7 @@ const WorldThree = () => {
             heightExceeded={modal.heightExceeded}
             widthExceeded={modal.widthExceeded}
             handleCharacterClick={handlePopupClick}
-            handleContainerClick={resetState}
+            handleContainerClick={resetModalState}
           />
         )}
       </div>
