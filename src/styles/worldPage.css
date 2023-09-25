@@ -9,7 +9,7 @@
   background-color: rgba(255, 240, 245, 0.5);
 }
 
-.popupCharacter {
+.character {
   display: flex;
 }
 
@@ -17,12 +17,12 @@
   max-width: 100%;
 }
 
-.popupCharacter img {
+.character img {
   height: 60px;
   width: 60px;
   object-fit: contain;
 }
 
-.popupCharacter:hover {
+.popup .character:hover {
   background-color: rgba(255, 164, 194, 0.8);
 }

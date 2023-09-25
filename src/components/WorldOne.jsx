@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Characters from "./Characters";
+
 import worldImg from "../images/PrehISOria.png";
 import marioImg from "../images/mario.png";
 import blastoiseImg from "../images/blastoise.png";
@@ -11,18 +13,11 @@ const Popup = ({ xPosition, yPosition }) => {
       className="popup"
       style={{ top: `${yPosition}px`, left: `${xPosition}px` }}
     >
-      <div className="popupCharacter">
-        <img src={marioImg} alt="" />
-        <h4>Mario</h4>
-      </div>
-      <div className="popupCharacter">
-        <img src={blastoiseImg} alt="" />
-        <h4>Blastoise</h4>
-      </div>
-      <div className="popupCharacter">
-        <img src={cronoImg} alt="" />
-        <h4>Crono</h4>
-      </div>
+      <Characters
+        characterOne={{ name: "Mario", image: marioImg }}
+        characterTwo={{ name: "Blastoise", image: blastoiseImg }}
+        characterThree={{ name: "Crono", image: cronoImg }}
+      />
     </div>
   );
 };
