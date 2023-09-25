@@ -7,17 +7,42 @@ import waldoImg from "../images/waldo.png";
 import rickImg from "../images/rick.png";
 import edImg from "../images/ed.png";
 
-const Popup = ({ xPosition, yPosition }) => {
+const Popup = ({
+  xPosition,
+  yPosition,
+  heightExceeded,
+  widthExceeded,
+  handleClick,
+}) => {
+  let widthFlexDirection = "row";
+  let heightAlign = "flex-start";
+
+  if (widthExceeded === true) {
+    widthFlexDirection = "row-reverse";
+  }
+
+  if (heightExceeded === true) {
+    heightAlign = "flex-end";
+  }
+
   return (
     <div
       className="popup"
-      style={{ top: `${yPosition}px`, left: `${xPosition}px` }}
+      style={{
+        top: `${yPosition}px`,
+        left: `${xPosition}px`,
+        flexDirection: widthFlexDirection,
+      }}
     >
-      <Characters
-        characterOne={{ name: "Waldo", image: waldoImg }}
-        characterTwo={{ name: "Rick", image: rickImg }}
-        characterThree={{ name: "Ed", image: edImg }}
-      />
+      <div className="targetBox" style={{ alignSelf: heightAlign }}></div>
+      <div className="characterBox">
+        <Characters
+          characterOne={{ name: "Waldo", image: waldoImg }}
+          characterTwo={{ name: "Rick", image: rickImg }}
+          characterThree={{ name: "Ed", image: edImg }}
+          handleClick={handleClick}
+        />
+      </div>
     </div>
   );
 };
@@ -27,6 +52,8 @@ const WorldThree = () => {
     active: false,
     xPosition: 0,
     yPosition: 0,
+    heightExceeded: false,
+    widthExceeded: false,
   });
 
   const handleImgClick = (e) => {
@@ -34,31 +61,53 @@ const WorldThree = () => {
     let width = e.target.clientWidth;
     let x = e.nativeEvent.offsetX;
     let y = e.nativeEvent.offsetY;
+    let xExceeded = false;
+    let yExceeded = false;
 
-    if (x + 150 > width) {
-      let diff = x + 150 - width;
-      x -= diff;
+    // if width of modal exceeds image edge
+    if (x + 200 > width) {
+      // Change modal position by subtracting from it's X coordinate value.
+      x -= 160;
+      xExceeded = true;
+
+      if (x + 200 > width) x -= 20;
     }
 
-    if (y + 150 > height) {
-      let diff = y + 180 - height;
-      y -= diff;
+    // if height of modal exceeds image edge
+    if (y + 180 > height) {
+      // Change modal position by subtracting from it's Y coordinate value.
+      y -= 140;
+      yExceeded = true;
+
+      if (y + 200 > height) y -= 20;
     }
+
+    /* 
+      Also subtract X and Y positions by half of the Target Box's dimensions to
+      ensure that the clicked position is centered within the Target Box.
+    */
+    if (y - 20 > 0) y -= 20;
+    if (x - 20 > 0) x -= 20;
 
     setModal({
       active: true,
       xPosition: x,
       yPosition: y,
+      heightExceeded: yExceeded,
+      widthExceeded: xExceeded,
     });
   };
 
   // Reset to default
-  const handlePopupClick = () => {
-    setModal({
-      active: false,
-      xPosition: 0,
-      yPosition: 0,
-    });
+  const handlePopupClick = (e) => {
+    console.log(e.target.id);
+    // setModal({
+    //   active: false,
+    //   xPosition: 0,
+    //   yPosition: 0,
+    // heightExceeded: false,
+    // widthExceeded: false,
+    // });
   };
 
   return (
@@ -66,7 +115,13 @@ const WorldThree = () => {
       <div className="worldImgWrapper">
         <img src={Img3} alt="memesupreme Image" onClick={handleImgClick} />
         {modal.active === true && (
-          <Popup xPosition={modal.xPosition} yPosition={modal.yPosition} />
+          <Popup
+            xPosition={modal.xPosition}
+            yPosition={modal.yPosition}
+            heightExceeded={modal.heightExceeded}
+            widthExceeded={modal.widthExceeded}
+            handleClick={handlePopupClick}
+          />
         )}
       </div>
     </div>
@@ -76,6 +131,9 @@ const WorldThree = () => {
 Popup.propTypes = {
   xPosition: PropTypes.number,
   yPosition: PropTypes.number,
+  heightExceeded: PropTypes.bool,
+  widthExceeded: PropTypes.bool,
+  handleClick: PropTypes.func,
 };
 
 export default WorldThree;
