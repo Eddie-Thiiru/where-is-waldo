@@ -12,7 +12,8 @@ const Popup = ({
   yPosition,
   heightExceeded,
   widthExceeded,
-  handleClick,
+  handleCharacterClick,
+  handleContainerClick,
 }) => {
   let widthFlexDirection = "row";
   let heightAlign = "flex-start";
@@ -33,6 +34,7 @@ const Popup = ({
         left: `${xPosition}px`,
         flexDirection: widthFlexDirection,
       }}
+      onClick={handleContainerClick}
     >
       <div className="targetBox" style={{ alignSelf: heightAlign }}></div>
       <div className="characterBox">
@@ -40,7 +42,7 @@ const Popup = ({
           characterOne={{ name: "Waldo", image: waldoImg }}
           characterTwo={{ name: "Rick", image: rickImg }}
           characterThree={{ name: "Ed", image: edImg }}
-          handleClick={handleClick}
+          handleClick={handleCharacterClick}
         />
       </div>
     </div>
@@ -57,6 +59,11 @@ const WorldThree = () => {
   });
 
   const handleImgClick = (e) => {
+    if (modal.active) {
+      resetState();
+      return;
+    }
+
     let height = e.target.clientHeight;
     let width = e.target.clientWidth;
     let x = e.nativeEvent.offsetX;
@@ -98,16 +105,19 @@ const WorldThree = () => {
     });
   };
 
-  // Reset to default
   const handlePopupClick = (e) => {
     console.log(e.target.id);
-    // setModal({
-    //   active: false,
-    //   xPosition: 0,
-    //   yPosition: 0,
-    // heightExceeded: false,
-    // widthExceeded: false,
-    // });
+  };
+
+  // Reset to default
+  const resetState = () => {
+    setModal({
+      active: false,
+      xPosition: 0,
+      yPosition: 0,
+      heightExceeded: false,
+      widthExceeded: false,
+    });
   };
 
   return (
@@ -120,7 +130,8 @@ const WorldThree = () => {
             yPosition={modal.yPosition}
             heightExceeded={modal.heightExceeded}
             widthExceeded={modal.widthExceeded}
-            handleClick={handlePopupClick}
+            handleCharacterClick={handlePopupClick}
+            handleContainerClick={resetState}
           />
         )}
       </div>
@@ -133,7 +144,8 @@ Popup.propTypes = {
   yPosition: PropTypes.number,
   heightExceeded: PropTypes.bool,
   widthExceeded: PropTypes.bool,
-  handleClick: PropTypes.func,
+  handleCharacterClick: PropTypes.func,
+  handleContainerClick: PropTypes.func,
 };
 
 export default WorldThree;
