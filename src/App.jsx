@@ -31,9 +31,9 @@ function App() {
           <Header>
             <Characters
               charactersData={[
-                { name: "Mario", image: marioImg },
-                { name: "Blastoise", image: blastoiseImg },
-                { name: "Crono", image: cronoImg },
+                { pos: 1, name: "Mario", image: marioImg },
+                { pos: 2, name: "Blastoise", image: blastoiseImg },
+                { pos: 3, name: "Crono", image: cronoImg },
               ]}
             />
           </Header>
@@ -44,9 +44,9 @@ function App() {
           <Header>
             <Characters
               charactersData={[
-                { name: "Gandalf", image: gandalfImg },
-                { name: "Shrek", image: shrekImg },
-                { name: "Genie", image: genieImg },
+                { pos: 1, name: "Gandalf", image: gandalfImg },
+                { pos: 2, name: "Shrek", image: shrekImg },
+                { pos: 3, name: "Genie", image: genieImg },
               ]}
             />
           </Header>
@@ -57,9 +57,9 @@ function App() {
           <Header>
             <Characters
               charactersData={[
-                { name: "Waldo", image: waldoImg },
-                { name: "Rick", image: rickImg },
-                { name: "Ed", image: edImg },
+                { pos: 1, name: "Waldo", image: waldoImg },
+                { pos: 2, name: "Rick", image: rickImg },
+                { pos: 3, name: "Ed", image: edImg },
               ]}
             />
           </Header>

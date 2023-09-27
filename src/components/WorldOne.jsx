@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Characters from "./Characters";
+import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import worldImg from "../images/PrehISOria.png";
@@ -52,6 +53,7 @@ const WorldOne = () => {
     characters,
     feedback,
     marker,
+    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
@@ -72,6 +74,7 @@ const WorldOne = () => {
       </div>
       <div className="worldImgWrapper">
         <img src={worldImg} alt="PrehISOria Image" onClick={handleImgClick} />
+
         {feedback.wrongAnswer === true ? (
           <div className="wrongAnswerPopup">
             <p>Try Again!</p>
@@ -95,15 +98,6 @@ const WorldOne = () => {
           />
         )}
         <div
-          className={marker[0].status}
-          style={{
-            top: `${marker[0].yPosition}px`,
-            left: `${marker[0].xPosition}px`,
-          }}
-        >
-          Here
-        </div>
-        <div
           className={marker[1].status}
           style={{
             top: `${marker[1].yPosition}px`,
@@ -121,6 +115,16 @@ const WorldOne = () => {
         >
           Here
         </div>
+        <div
+          className={marker[3].status}
+          style={{
+            top: `${marker[3].yPosition}px`,
+            left: `${marker[3].xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        {gameWon === true && <Player time={time} />}
       </div>
     </div>
   );

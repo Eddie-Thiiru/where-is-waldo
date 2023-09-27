@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Characters from "./Characters";
+import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import Img3 from "../images/memesupreme.jpg";
@@ -52,6 +53,7 @@ const WorldThree = () => {
     characters,
     feedback,
     marker,
+    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
@@ -95,15 +97,6 @@ const WorldThree = () => {
           />
         )}
         <div
-          className={marker[0].status}
-          style={{
-            top: `${marker[0].yPosition}px`,
-            left: `${marker[0].xPosition}px`,
-          }}
-        >
-          Here
-        </div>
-        <div
           className={marker[1].status}
           style={{
             top: `${marker[1].yPosition}px`,
@@ -121,6 +114,16 @@ const WorldThree = () => {
         >
           Here
         </div>
+        <div
+          className={marker[3].status}
+          style={{
+            top: `${marker[3].yPosition}px`,
+            left: `${marker[3].xPosition}px`,
+          }}
+        >
+          Here
+        </div>
+        {gameWon === true && <Player time={time} />}
       </div>
     </div>
   );

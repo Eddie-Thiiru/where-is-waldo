@@ -48,6 +48,16 @@
 .visible {
   display: visible;
   position: absolute;
+  padding: 10px;
+}
+
+.playerInput {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-color: lightgreen;
+  left: 50%;
+  top: 50%;
 }
 
 .worldImgWrapper img {

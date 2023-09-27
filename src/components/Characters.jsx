@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 const Characters = ({ charactersData, handleClick }) => {
   return (
     <>
-      {charactersData.map((character, index) => {
-        let classStr = `character ${index}`;
+      {charactersData.map((character) => {
+        let classStr = `character ${character.pos}`;
 
         return (
           <div
-            key={index}
+            key={character.pos}
             className={classStr}
             id={character.name}
             onClick={handleClick}

@@ -24,19 +24,19 @@ const data = {
 
 const charactersData = {
   worldOne: [
-    { name: "Mario", image: marioImg },
-    { name: "Blastoise", image: blastoiseImg },
-    { name: "Crono", image: cronoImg },
+    { pos: 1, name: "Mario", image: marioImg },
+    { pos: 2, name: "Blastoise", image: blastoiseImg },
+    { pos: 3, name: "Crono", image: cronoImg },
   ],
   worldTwo: [
-    { name: "Gandalf", image: gandalfImg },
-    { name: "Shrek", image: shrekImg },
-    { name: "Genie", image: genieImg },
+    { pos: 1, name: "Gandalf", image: gandalfImg },
+    { pos: 2, name: "Shrek", image: shrekImg },
+    { pos: 3, name: "Genie", image: genieImg },
   ],
   worldThree: [
-    { name: "Waldo", image: waldoImg },
-    { name: "Rick", image: rickImg },
-    { name: "Ed", image: edImg },
+    { pos: 1, name: "Waldo", image: waldoImg },
+    { pos: 2, name: "Rick", image: rickImg },
+    { pos: 3, name: "Ed", image: edImg },
   ],
 };
 
@@ -59,19 +59,24 @@ const useWorldState = (world) => {
     correctAnswer: { status: false, name: "" },
   });
   const [marker, setMarker] = useState({
-    0: { status: "hidden", xPosition: 0, yPosition: 0 },
     1: { status: "hidden", xPosition: 0, yPosition: 0 },
     2: { status: "hidden", xPosition: 0, yPosition: 0 },
+    3: { status: "hidden", xPosition: 0, yPosition: 0 },
   });
+  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     // sets time for every 10 milliseconds
-    const interval = setInterval(() => {
-      setTime((count) => count + 1);
-    }, 10);
+    let interval;
+
+    if (gameWon === false) {
+      interval = setInterval(() => {
+        setTime((count) => count + 1);
+      }, 10);
+    }
 
     return () => clearInterval(interval);
-  }, []);
+  }, [gameWon]);
 
   useEffect(() => {
     // Remove feedback popup after timeout
@@ -156,15 +161,20 @@ const useWorldState = (world) => {
   const handlePopupClick = (e) => {
     const characterName = e.target.id;
 
-    if (data[characterName] === 1) {
+    // ****** placeholder data replace with real data ********
+    if (
+      data[characterName] === 1 ||
+      data[characterName] === 2 ||
+      data[characterName] === 3
+    ) {
       // Adds feedback message
       setFeedBack({
         wrongAnswer: false,
         correctAnswer: { status: true, name: characterName },
       });
 
-      // ****** placeholder data replace with real data ********
       const posStr = e.target.className.split(" ")[1];
+      console.log;
 
       // Adds marker
       setMarker({
@@ -177,11 +187,14 @@ const useWorldState = (world) => {
       });
 
       // Removes character
-      let newData = charactersData[world].filter(
-        (obj) => obj.name !== characterName
-      );
+      let newArr = characters.filter((obj) => obj.name !== characterName);
 
-      setCharacters(newData);
+      setCharacters(newArr);
+
+      // If round completed
+      if (newArr.length === 0) {
+        setGameWon(true);
+      }
     } else {
       // Adds feedback message
       setFeedBack({
@@ -208,6 +221,7 @@ const useWorldState = (world) => {
     characters,
     feedback,
     marker,
+    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
