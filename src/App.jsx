@@ -26,25 +26,35 @@ function App() {
 
   return (
     <div id="App">
-      <Header>
-        {name === "world-one" ? (
-          <Characters
-            charactersData={[
-              { name: "Mario", image: marioImg },
-              { name: "Blastoise", image: blastoiseImg },
-              { name: "Crono", image: cronoImg },
-            ]}
-          />
-        ) : name === "world-two" ? (
-          <Characters
-            charactersData={[
-              { name: "Gandalf", image: gandalfImg },
-              { name: "Shrek", image: shrekImg },
-              { name: "Genie", image: genieImg },
-            ]}
-          />
-        ) : (
-          name === "world-three" && (
+      {name === "world-one" ? (
+        <>
+          <Header>
+            <Characters
+              charactersData={[
+                { name: "Mario", image: marioImg },
+                { name: "Blastoise", image: blastoiseImg },
+                { name: "Crono", image: cronoImg },
+              ]}
+            />
+          </Header>
+          <WorldOne />
+        </>
+      ) : name === "world-two" ? (
+        <>
+          <Header>
+            <Characters
+              charactersData={[
+                { name: "Gandalf", image: gandalfImg },
+                { name: "Shrek", image: shrekImg },
+                { name: "Genie", image: genieImg },
+              ]}
+            />
+          </Header>
+          <WorldTwo />
+        </>
+      ) : name === "world-three" ? (
+        <>
+          <Header>
             <Characters
               charactersData={[
                 { name: "Waldo", image: waldoImg },
@@ -52,17 +62,14 @@ function App() {
                 { name: "Ed", image: edImg },
               ]}
             />
-          )
-        )}
-      </Header>
-      {name === "world-one" ? (
-        <WorldOne />
-      ) : name === "world-two" ? (
-        <WorldTwo />
-      ) : name === "world-three" ? (
-        <WorldThree />
+          </Header>
+          <WorldThree />
+        </>
       ) : name === undefined ? (
-        <Homepage />
+        <>
+          <Header></Header>
+          <Homepage />
+        </>
       ) : (
         <div>Error</div>
       )}

@@ -41,6 +41,7 @@ const charactersData = {
 };
 
 const useWorldState = (world) => {
+  const [time, setTime] = useState(0);
   const [target, setTarget] = useState({
     xPosition: 0,
     yPosition: 0,
@@ -62,6 +63,15 @@ const useWorldState = (world) => {
     1: { status: "hidden", xPosition: 0, yPosition: 0 },
     2: { status: "hidden", xPosition: 0, yPosition: 0 },
   });
+
+  useEffect(() => {
+    // sets time for every 10 milliseconds
+    const interval = setInterval(() => {
+      setTime((count) => count + 1);
+    }, 10);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Remove feedback popup after timeout
@@ -193,6 +203,7 @@ const useWorldState = (world) => {
   };
 
   return [
+    time,
     modal,
     characters,
     feedback,

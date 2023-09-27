@@ -47,6 +47,7 @@ const Popup = ({
 
 const WorldThree = () => {
   const [
+    time,
     modal,
     characters,
     feedback,
@@ -58,6 +59,17 @@ const WorldThree = () => {
 
   return (
     <div className="worldThreePage">
+      <div className="timer">
+        <p>
+          <span className="minutes">
+            {("0" + Math.floor((time % 360000) / 6000)).slice(-2)}:
+          </span>
+          <span className="seconds">
+            {("0" + Math.floor((time % 6000) / 100)).slice(-2)}:
+          </span>
+          <span className="milliseconds">{("0" + (time % 100)).slice(-2)}</span>
+        </p>
+      </div>
       <div className="worldImgWrapper">
         <img src={Img3} alt="memesupreme Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (
