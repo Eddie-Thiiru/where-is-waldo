@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../styles/header.css";
 
@@ -6,6 +7,9 @@ const Header = ({ children }) => {
     <header className="appHeader">
       <h1>photoTag</h1>
       <div className="headerCharacters">{children}</div>
+      <nav>
+        <Link to={"/leaderboard"}>Leaderboard</Link>
+      </nav>
     </header>
   );
 };

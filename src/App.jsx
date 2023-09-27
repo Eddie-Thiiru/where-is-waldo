@@ -5,6 +5,7 @@ import WorldOne from "./components/WorldOne";
 import WorldTwo from "./components/WorldTwo";
 import WorldThree from "./components/WorldThree";
 import Characters from "./components/Characters";
+import LeaderboardPage from "./components/Leaderboard";
 
 // Import character images
 import marioImg from "./images/mario.png";
@@ -64,6 +65,11 @@ function App() {
             />
           </Header>
           <WorldThree />
+        </>
+      ) : name === "leaderboard" ? (
+        <>
+          <Header></Header>
+          <LeaderboardPage />
         </>
       ) : name === undefined ? (
         <>
