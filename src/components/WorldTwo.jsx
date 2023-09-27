@@ -3,11 +3,9 @@ import Characters from "./Characters";
 import useWorldState from "./utils/useWorldState";
 
 import Img2 from "../images/ISOrd & ISOrcery.png";
-import gandalfImg from "../images/gandalf.png";
-import shrekImg from "../images/shrek.png";
-import genieImg from "../images/genie.png";
 
 const Popup = ({
+  characters,
   xPosition,
   yPosition,
   heightExceeded,
@@ -39,9 +37,7 @@ const Popup = ({
       <div className="targetBox" style={{ alignSelf: heightAlign }}></div>
       <div className="characterBox">
         <Characters
-          characterOne={{ name: "Gandalf", image: gandalfImg }}
-          characterTwo={{ name: "Shrek", image: shrekImg }}
-          characterThree={{ name: "Genie", image: genieImg }}
+          charactersData={characters}
           handleClick={handleCharacterClick}
         />
       </div>
@@ -52,12 +48,14 @@ const Popup = ({
 const WorldTwo = () => {
   const [
     modal,
+    characters,
     feedback,
     marker,
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState();
+  ] = useWorldState("worldTwo");
+
   return (
     <div className="WorldTwoPage">
       <div className="worldImgWrapper">
@@ -75,6 +73,7 @@ const WorldTwo = () => {
         )}
         {modal.active === true && (
           <Popup
+            characters={characters}
             xPosition={modal.xPosition}
             yPosition={modal.yPosition}
             heightExceeded={modal.heightExceeded}
@@ -84,28 +83,28 @@ const WorldTwo = () => {
           />
         )}
         <div
-          className={marker.one.status}
+          className={marker[0].status}
           style={{
-            top: `${marker.one.yPosition}px`,
-            left: `${marker.one.xPosition}px`,
+            top: `${marker[0].yPosition}px`,
+            left: `${marker[0].xPosition}px`,
           }}
         >
           Here
         </div>
         <div
-          className={marker.two.status}
+          className={marker[1].status}
           style={{
-            top: `${marker.two.yPosition}px`,
-            left: `${marker.two.xPosition}px`,
+            top: `${marker[1].yPosition}px`,
+            left: `${marker[1].xPosition}px`,
           }}
         >
           Here
         </div>
         <div
-          className={marker.three.status}
+          className={marker[2].status}
           style={{
-            top: `${marker.three.yPosition}px`,
-            left: `${marker.three.xPosition}px`,
+            top: `${marker[2].yPosition}px`,
+            left: `${marker[2].xPosition}px`,
           }}
         >
           Here
@@ -116,6 +115,7 @@ const WorldTwo = () => {
 };
 
 Popup.propTypes = {
+  characters: PropTypes.array,
   xPosition: PropTypes.number,
   yPosition: PropTypes.number,
   heightExceeded: PropTypes.bool,

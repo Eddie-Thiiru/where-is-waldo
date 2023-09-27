@@ -1,18 +1,46 @@
 import { useState, useEffect } from "react";
 
+import marioImg from "../../images/mario.png";
+import blastoiseImg from "../../images/blastoise.png";
+import cronoImg from "../../images/crono.png";
+import gandalfImg from "../../images/gandalf.png";
+import shrekImg from "../../images/shrek.png";
+import genieImg from "../../images/genie.png";
+import waldoImg from "../../images/waldo.png";
+import rickImg from "../../images/rick.png";
+import edImg from "../../images/ed.png";
+
 const data = {
-  mario: 1,
-  blastoise: 2,
-  crono: 3,
-  gandalf: 1,
-  shrek: 2,
-  genie: 3,
-  waldo: 1,
-  rick: 2,
-  ed: 3,
+  Mario: 1,
+  Blastoise: 2,
+  Crono: 3,
+  Gandalf: 1,
+  Shrek: 2,
+  Genie: 3,
+  Waldo: 1,
+  Rick: 2,
+  Ed: 3,
 };
 
-const useWorldState = () => {
+const charactersData = {
+  worldOne: [
+    { name: "Mario", image: marioImg },
+    { name: "Blastoise", image: blastoiseImg },
+    { name: "Crono", image: cronoImg },
+  ],
+  worldTwo: [
+    { name: "Gandalf", image: gandalfImg },
+    { name: "Shrek", image: shrekImg },
+    { name: "Genie", image: genieImg },
+  ],
+  worldThree: [
+    { name: "Waldo", image: waldoImg },
+    { name: "Rick", image: rickImg },
+    { name: "Ed", image: edImg },
+  ],
+};
+
+const useWorldState = (world) => {
   const [target, setTarget] = useState({
     xPosition: 0,
     yPosition: 0,
@@ -24,14 +52,15 @@ const useWorldState = () => {
     heightExceeded: false,
     widthExceeded: false,
   });
+  const [characters, setCharacters] = useState(charactersData[world]);
   const [feedback, setFeedBack] = useState({
     wrongAnswer: false,
     correctAnswer: { status: false, name: "" },
   });
   const [marker, setMarker] = useState({
-    one: { status: "hidden", xPosition: 0, yPosition: 0 },
-    two: { status: "hidden", xPosition: 0, yPosition: 0 },
-    three: { status: "hidden", xPosition: 0, yPosition: 0 },
+    0: { status: "hidden", xPosition: 0, yPosition: 0 },
+    1: { status: "hidden", xPosition: 0, yPosition: 0 },
+    2: { status: "hidden", xPosition: 0, yPosition: 0 },
   });
 
   useEffect(() => {
@@ -100,9 +129,6 @@ const useWorldState = () => {
       xTargetPos = xTargetPos - 20;
     }
 
-    console.log({ x, y });
-    console.log({ xTargetPos, yTargetPos });
-
     setTarget({
       xPosition: xTargetPos,
       yPosition: yTargetPos,
@@ -118,26 +144,36 @@ const useWorldState = () => {
   };
 
   const handlePopupClick = (e) => {
-    const characterName = e.target.id.toLowerCase();
+    const characterName = e.target.id;
 
     if (data[characterName] === 1) {
+      // Adds feedback message
       setFeedBack({
         wrongAnswer: false,
         correctAnswer: { status: true, name: characterName },
       });
 
       // ****** placeholder data replace with real data ********
-      const posString = e.target.className.split(" ")[1];
+      const posStr = e.target.className.split(" ")[1];
 
+      // Adds marker
       setMarker({
         ...marker,
-        [posString]: {
+        [posStr]: {
           status: "visible",
           xPosition: target.xPosition,
           yPosition: target.yPosition,
         },
       });
+
+      // Removes character
+      let newData = charactersData[world].filter(
+        (obj) => obj.name !== characterName
+      );
+
+      setCharacters(newData);
     } else {
+      // Adds feedback message
       setFeedBack({
         wrongAnswer: true,
         correctAnswer: { status: false, name: "" },
@@ -158,6 +194,7 @@ const useWorldState = () => {
 
   return [
     modal,
+    characters,
     feedback,
     marker,
     handleImgClick,

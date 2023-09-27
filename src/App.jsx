@@ -29,22 +29,28 @@ function App() {
       <Header>
         {name === "world-one" ? (
           <Characters
-            characterOne={{ name: "Mario", image: marioImg }}
-            characterTwo={{ name: "Blastoise", image: blastoiseImg }}
-            characterThree={{ name: "Crono", image: cronoImg }}
+            charactersData={[
+              { name: "Mario", image: marioImg },
+              { name: "Blastoise", image: blastoiseImg },
+              { name: "Crono", image: cronoImg },
+            ]}
           />
         ) : name === "world-two" ? (
           <Characters
-            characterOne={{ name: "Gandalf", image: gandalfImg }}
-            characterTwo={{ name: "Shrek", image: shrekImg }}
-            characterThree={{ name: "Genie", image: genieImg }}
+            charactersData={[
+              { name: "Gandalf", image: gandalfImg },
+              { name: "Shrek", image: shrekImg },
+              { name: "Genie", image: genieImg },
+            ]}
           />
         ) : (
           name === "world-three" && (
             <Characters
-              characterOne={{ name: "Waldo", image: waldoImg }}
-              characterTwo={{ name: "Rick", image: rickImg }}
-              characterThree={{ name: "Ed", image: edImg }}
+              charactersData={[
+                { name: "Waldo", image: waldoImg },
+                { name: "Rick", image: rickImg },
+                { name: "Ed", image: edImg },
+              ]}
             />
           )
         )}
