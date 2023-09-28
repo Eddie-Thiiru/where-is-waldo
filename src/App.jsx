@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div id="App">
-      {name === "world-one" ? (
+      {name === "prehisoria" ? (
         <>
           <Header>
             <Characters
@@ -40,7 +40,7 @@ function App() {
           </Header>
           <WorldOne />
         </>
-      ) : name === "world-two" ? (
+      ) : name === "isord" ? (
         <>
           <Header>
             <Characters
@@ -53,7 +53,7 @@ function App() {
           </Header>
           <WorldTwo />
         </>
-      ) : name === "world-three" ? (
+      ) : name === "memesupreme" ? (
         <>
           <Header>
             <Characters

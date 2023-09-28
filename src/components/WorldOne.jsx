@@ -57,7 +57,7 @@ const WorldOne = () => {
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("worldOne");
+  ] = useWorldState("prehisoria");
 
   return (
     <div className="worldOnePage">

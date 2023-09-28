@@ -57,7 +57,7 @@ const WorldThree = () => {
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("worldThree");
+  ] = useWorldState("memesupreme");
 
   return (
     <div className="worldThreePage">

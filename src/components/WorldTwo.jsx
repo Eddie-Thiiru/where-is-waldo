@@ -57,7 +57,7 @@ const WorldTwo = () => {
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("worldTwo");
+  ] = useWorldState("isord");
 
   return (
     <div className="WorldTwoPage">

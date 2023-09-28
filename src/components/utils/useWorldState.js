@@ -23,17 +23,17 @@ const data = {
 };
 
 const charactersData = {
-  worldOne: [
+  prehisoria: [
     { pos: 1, name: "Mario", image: marioImg },
     { pos: 2, name: "Blastoise", image: blastoiseImg },
     { pos: 3, name: "Crono", image: cronoImg },
   ],
-  worldTwo: [
+  isord: [
     { pos: 1, name: "Gandalf", image: gandalfImg },
     { pos: 2, name: "Shrek", image: shrekImg },
     { pos: 3, name: "Genie", image: genieImg },
   ],
-  worldThree: [
+  memesupreme: [
     { pos: 1, name: "Waldo", image: waldoImg },
     { pos: 2, name: "Rick", image: rickImg },
     { pos: 3, name: "Ed", image: edImg },
@@ -88,7 +88,7 @@ const useWorldState = (world) => {
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [feedback]);
+  }, [feedback.wrongAnswer, feedback.correctAnswer.status]);
 
   const handleImgClick = (e) => {
     if (modal.active) {
@@ -104,6 +104,8 @@ const useWorldState = (world) => {
     let yExceeded = false;
     let xTargetPos = x;
     let yTargetPos = y;
+    console.log(x);
+    console.log(y);
 
     // if width of modal exceeds image edge
     if (x + 200 > width) {

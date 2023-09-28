@@ -1,5 +1,6 @@
 .worldImgWrapper {
   position: relative;
+  display: flex;
 }
 
 .popup {

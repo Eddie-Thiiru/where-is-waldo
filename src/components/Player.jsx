@@ -4,6 +4,10 @@ const Player = ({ time }) => {
   const minutes = ("0" + Math.floor((time % 360000) / 6000)).slice(-2);
   const seconds = ("0" + Math.floor((time % 6000) / 100)).slice(-2);
 
+  // Add time taken to db
+  // Add timestamp to db
+  // Add world to db
+
   return (
     <div className="playerInput">
       <h3>Congratulations!</h3>
