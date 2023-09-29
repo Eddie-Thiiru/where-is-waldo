@@ -7,48 +7,45 @@ import Img2 from "../images/ISOrd & ISOrcery.png";
 
 const Popup = ({
   characters,
-  xPosition,
-  yPosition,
-  heightExceeded,
-  widthExceeded,
+  targetXPos,
+  targetYPos,
+  modalXPos,
+  modalYPos,
   handleCharacterClick,
   handleContainerClick,
 }) => {
-  let widthFlexDirection = "row";
-  let heightAlign = "flex-start";
-
-  if (widthExceeded === true) {
-    widthFlexDirection = "row-reverse";
-  }
-
-  if (heightExceeded === true) {
-    heightAlign = "flex-end";
-  }
-
   return (
-    <div
-      className="popup"
-      style={{
-        top: `${yPosition}px`,
-        left: `${xPosition}px`,
-        flexDirection: widthFlexDirection,
-      }}
-      onClick={handleContainerClick}
-    >
-      <div className="targetBox" style={{ alignSelf: heightAlign }}></div>
-      <div className="characterBox">
-        <Characters
-          charactersData={characters}
-          handleClick={handleCharacterClick}
-        />
+    <>
+      <div
+        className="targetBox"
+        style={{
+          top: `${targetYPos}px`,
+          left: `${targetXPos}px`,
+        }}
+      ></div>
+      <div
+        className="popup"
+        style={{
+          top: `${modalYPos}px`,
+          left: `${modalXPos}px`,
+        }}
+        onClick={handleContainerClick}
+      >
+        <div className="characterBox">
+          <Characters
+            charactersData={characters}
+            handleClick={handleCharacterClick}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
 const WorldTwo = () => {
   const [
     time,
+    targetBox,
     modal,
     characters,
     feedback,
@@ -88,10 +85,10 @@ const WorldTwo = () => {
         {modal.active === true && (
           <Popup
             characters={characters}
-            xPosition={modal.xPosition}
-            yPosition={modal.yPosition}
-            heightExceeded={modal.heightExceeded}
-            widthExceeded={modal.widthExceeded}
+            targetXPos={targetBox.xPos}
+            targetYPos={targetBox.yPos}
+            modalXPos={modal.xPosition}
+            modalYPos={modal.yPosition}
             handleCharacterClick={handlePopupClick}
             handleContainerClick={resetModalState}
           />
@@ -131,10 +128,10 @@ const WorldTwo = () => {
 
 Popup.propTypes = {
   characters: PropTypes.array,
-  xPosition: PropTypes.number,
-  yPosition: PropTypes.number,
-  heightExceeded: PropTypes.bool,
-  widthExceeded: PropTypes.bool,
+  targetXPos: PropTypes.number,
+  targetYPos: PropTypes.number,
+  modalXPos: PropTypes.number,
+  modalYPos: PropTypes.number,
   handleCharacterClick: PropTypes.func,
   handleContainerClick: PropTypes.func,
 };

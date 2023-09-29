@@ -48,7 +48,7 @@ const originalDimensions = {
 
 const useWorldState = (world) => {
   const [time, setTime] = useState(0);
-  const [target, setTarget] = useState({
+  const [targetBox, setTargetBox] = useState({
     xPos: 0,
     yPos: 0,
     clientWidth: 0,
@@ -60,8 +60,6 @@ const useWorldState = (world) => {
     active: false,
     xPosition: 0,
     yPosition: 0,
-    heightExceeded: false,
-    widthExceeded: false,
   });
   const [marker, setMarker] = useState({
     1: { status: "hidden", xPosition: 0, yPosition: 0 },
@@ -128,59 +126,37 @@ const useWorldState = (world) => {
     let width = e.target.clientWidth;
     let x = e.nativeEvent.offsetX;
     let y = e.nativeEvent.offsetY;
-    let xExceeded = false;
-    let yExceeded = false;
     let xTargetPos = x;
     let yTargetPos = y;
 
-    // let rx = Math.round(originalSize.xAxis / x);
-    // let ry = Math.round(originalSize.yAxis / y);
-
-    // console.log(
-    //   Math.round((rx + 100) * x) / 100,
-    //   Math.round((ry + 100) * y) / 100
-    // );
+    // if both width and height of modal exceeds image edge
+    if (x + 190 > width && y + 180 > height) {
+      x += 40;
+      y += 40;
+    }
 
     // if width of modal exceeds image edge
-    if (x + 200 > width) {
-      // Change modal position by subtracting from it's X coordinate value.
-      x -= 160;
-      xExceeded = true;
-      xTargetPos = x + 160;
-
-      if (x + 200 > width) {
-        x -= 20;
-        xTargetPos = xTargetPos - 20;
-      }
+    if (x + 190 > width) {
+      // Change modal position by subtracting both its width and target box width.
+      x -= 230;
     }
 
     // if height of modal exceeds image edge
     if (y + 180 > height) {
-      // Change modal position by subtracting from it's Y coordinate value.
-      y -= 140;
-      yExceeded = true;
-      yTargetPos = y + 140;
-
-      if (y + 200 > height) {
-        y -= 20;
-        yTargetPos = yTargetPos - 20;
-      }
+      // Change modal position by subtracting both its height and target box height.
+      y -= 220;
+      x -= 40;
     }
 
-    /*
-      Also subtract X and Y positions by half of the Target Box's dimensions to
-      ensure that the clicked position is centered within the Target Box.
-    */
-    if (y - 20 > 0) {
-      y -= 20;
-      yTargetPos = yTargetPos - 20;
-    }
-    if (x - 20 > 0) {
-      x -= 20;
-      xTargetPos = xTargetPos - 20;
-    }
+    /* Subtract X and Y positions by half of the Target Box's dimensions to
+      ensure that the clicked position is centered within the Target Box. */
+    xTargetPos -= 20;
+    yTargetPos -= 20;
 
-    setTarget({
+    // Add width of targeting box to add gap between modal and target box
+    x += 40;
+
+    setTargetBox({
       xPos: xTargetPos,
       yPos: yTargetPos,
       clientWidth: width,
@@ -191,8 +167,6 @@ const useWorldState = (world) => {
       active: true,
       xPosition: x,
       yPosition: y,
-      heightExceeded: yExceeded,
-      widthExceeded: xExceeded,
     });
   };
 
@@ -205,10 +179,10 @@ const useWorldState = (world) => {
         const originalWidth = originalDimensions[world].width;
         const originalHeight = originalDimensions[world].height;
         const adjustedX = Math.round(
-          (obj.positionX / originalWidth) * target.clientWidth
+          (obj.positionX / originalWidth) * targetBox.clientWidth
         );
         const adjustedY = Math.round(
-          (obj.positionY / originalHeight) * target.clientHeight
+          (obj.positionY / originalHeight) * targetBox.clientHeight
         );
 
         return { positionX: adjustedX, positionY: adjustedY };
@@ -257,8 +231,8 @@ const useWorldState = (world) => {
         ...marker,
         [posStr]: {
           status: "visible",
-          xPosition: target.xPosition,
-          yPosition: target.yPosition,
+          xPosition: targetBox.xPos,
+          yPosition: targetBox.yPos,
         },
       });
 
@@ -293,6 +267,7 @@ const useWorldState = (world) => {
 
   return [
     time,
+    targetBox,
     modal,
     characters,
     feedback,
