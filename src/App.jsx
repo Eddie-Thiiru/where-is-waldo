@@ -1,5 +1,7 @@
+import { useState, createContext } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./components/Header";
+import Timer from "./components/Timer";
 import Homepage from "./components/Homepage";
 import WorldOne from "./components/WorldOne";
 import WorldTwo from "./components/WorldTwo";
@@ -22,64 +24,72 @@ import edImg from "./images/ed.png";
 import "./styles/App.css";
 import "./styles/worldPage.css";
 
+export const WinContext = createContext();
+
 function App() {
+  const [gameWon, setGameWon] = useState(false);
   const { name } = useParams();
 
   return (
-    <div id="App">
-      {name === "prehisoria" ? (
-        <>
-          <Header>
-            <Characters
-              charactersData={[
-                { pos: 1, name: "Mario", image: marioImg },
-                { pos: 2, name: "Blastoise", image: blastoiseImg },
-                { pos: 3, name: "Crono", image: cronoImg },
-              ]}
-            />
-          </Header>
-          <WorldOne />
-        </>
-      ) : name === "isord" ? (
-        <>
-          <Header>
-            <Characters
-              charactersData={[
-                { pos: 1, name: "Gandalf", image: gandalfImg },
-                { pos: 2, name: "Shrek", image: shrekImg },
-                { pos: 3, name: "Genie", image: genieImg },
-              ]}
-            />
-          </Header>
-          <WorldTwo />
-        </>
-      ) : name === "memesupreme" ? (
-        <>
-          <Header>
-            <Characters
-              charactersData={[
-                { pos: 1, name: "Waldo", image: waldoImg },
-                { pos: 2, name: "Rick", image: rickImg },
-                { pos: 3, name: "Ed", image: edImg },
-              ]}
-            />
-          </Header>
-          <WorldThree />
-        </>
-      ) : name === "leaderboard" ? (
-        <>
-          <Header></Header>
-          <LeaderboardPage />
-        </>
-      ) : name === undefined ? (
-        <>
-          <Header></Header>
-          <Homepage />
-        </>
-      ) : (
-        <div>Error</div>
-      )}
-    </div>
+    <WinContext.Provider value={{ gameWon, setGameWon }}>
+      <div id="App">
+        {name === "prehisoria" ? (
+          <>
+            <Header>
+              <Characters
+                charactersData={[
+                  { pos: 1, name: "Mario", image: marioImg },
+                  { pos: 2, name: "Blastoise", image: blastoiseImg },
+                  { pos: 3, name: "Crono", image: cronoImg },
+                ]}
+              />
+            </Header>
+            <Timer world={"prehisoria"} />
+            <WorldOne />
+          </>
+        ) : name === "isord" ? (
+          <>
+            <Header>
+              <Characters
+                charactersData={[
+                  { pos: 1, name: "Gandalf", image: gandalfImg },
+                  { pos: 2, name: "Shrek", image: shrekImg },
+                  { pos: 3, name: "Genie", image: genieImg },
+                ]}
+              />
+            </Header>
+            <Timer world={"isord"} />
+            <WorldTwo />
+          </>
+        ) : name === "memesupreme" ? (
+          <>
+            <Header>
+              <Characters
+                charactersData={[
+                  { pos: 1, name: "Waldo", image: waldoImg },
+                  { pos: 2, name: "Rick", image: rickImg },
+                  { pos: 3, name: "Ed", image: edImg },
+                ]}
+              />
+            </Header>
+            <Timer world={"memesupreme"} />
+            <WorldThree />
+          </>
+        ) : name === "leaderboard" ? (
+          <>
+            <Header></Header>
+            <LeaderboardPage />
+          </>
+        ) : name === undefined ? (
+          <>
+            <Header></Header>
+            <Homepage />
+          </>
+        ) : (
+          <div>Error</div>
+        )}
+      </div>
+    </WinContext.Provider>
   );
 }
 

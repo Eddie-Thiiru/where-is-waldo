@@ -60,6 +60,7 @@
   background-color: lightgreen;
   left: 50%;
   top: 50%;
+  z-index: 1;
 }
 
 .worldImgWrapper img {

@@ -1,36 +1,22 @@
 import Popup from "./CharactersPopup";
-import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import Img2 from "../images/ISOrd & ISOrcery.png";
 
 const WorldTwo = () => {
-  const [
-    time,
+  const {
     targetBox,
     modal,
     characters,
     feedback,
     marker,
-    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("isord");
+  } = useWorldState("isord");
 
   return (
     <div className="WorldTwoPage">
-      <div className="timer">
-        <p>
-          <span className="minutes">
-            {("0" + Math.floor((time % 360000) / 6000)).slice(-2)}:
-          </span>
-          <span className="seconds">
-            {("0" + Math.floor((time % 6000) / 100)).slice(-2)}:
-          </span>
-          <span className="milliseconds">{("0" + (time % 100)).slice(-2)}</span>
-        </p>
-      </div>
       <div className="worldImgWrapper">
         <img src={Img2} alt="ISOrd & ISOrcery Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (
@@ -82,7 +68,6 @@ const WorldTwo = () => {
         >
           Here
         </div>
-        {gameWon === true && <Player time={time} />}
       </div>
     </div>
   );

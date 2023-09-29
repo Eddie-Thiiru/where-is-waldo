@@ -1,36 +1,22 @@
 import Popup from "./CharactersPopup";
-import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import Img3 from "../images/memesupreme.jpg";
 
 const WorldThree = () => {
-  const [
-    time,
+  const {
     targetBox,
     modal,
     characters,
     feedback,
     marker,
-    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("memesupreme");
+  } = useWorldState("memesupreme");
 
   return (
     <div className="worldThreePage">
-      <div className="timer">
-        <p>
-          <span className="minutes">
-            {("0" + Math.floor((time % 360000) / 6000)).slice(-2)}:
-          </span>
-          <span className="seconds">
-            {("0" + Math.floor((time % 6000) / 100)).slice(-2)}:
-          </span>
-          <span className="milliseconds">{("0" + (time % 100)).slice(-2)}</span>
-        </p>
-      </div>
       <div className="worldImgWrapper">
         <img src={Img3} alt="memesupreme Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (
@@ -82,7 +68,6 @@ const WorldThree = () => {
         >
           Here
         </div>
-        {gameWon === true && <Player time={time} />}
       </div>
     </div>
   );

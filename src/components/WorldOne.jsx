@@ -1,36 +1,22 @@
 import Popup from "./CharactersPopup";
-import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import worldImg from "../images/PrehISOria.png";
 
 const WorldOne = () => {
-  const [
-    time,
+  const {
     targetBox,
     modal,
     characters,
     feedback,
     marker,
-    gameWon,
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ] = useWorldState("prehisoria");
-  console.log(targetBox);
+  } = useWorldState("prehisoria");
+
   return (
     <div className="worldOnePage">
-      <div className="timer">
-        <p>
-          <span className="minutes">
-            {("0" + Math.floor((time % 360000) / 6000)).slice(-2)}:
-          </span>
-          <span className="seconds">
-            {("0" + Math.floor((time % 6000) / 100)).slice(-2)}:
-          </span>
-          <span className="milliseconds">{("0" + (time % 100)).slice(-2)}</span>
-        </p>
-      </div>
       <div className="worldImgWrapper">
         <img src={worldImg} alt="PrehISOria Image" onClick={handleImgClick} />
 
@@ -83,7 +69,6 @@ const WorldOne = () => {
         >
           Here
         </div>
-        {gameWon === true && <Player time={time} />}
       </div>
     </div>
   );

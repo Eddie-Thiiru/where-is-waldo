@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import { WinContext } from "../../App";
 import marioImg from "../../images/mario.png";
 import blastoiseImg from "../../images/blastoise.png";
 import cronoImg from "../../images/crono.png";
@@ -10,16 +10,10 @@ import waldoImg from "../../images/waldo.png";
 import rickImg from "../../images/rick.png";
 import edImg from "../../images/ed.png";
 
-const data = {
-  Mario: 1,
-  Blastoise: 2,
-  Crono: 3,
-  Gandalf: 1,
-  Shrek: 2,
-  Genie: 3,
-  Waldo: 1,
-  Rick: 2,
-  Ed: 3,
+const originalDimensions = {
+  prehisoria: { width: 1905, height: 1701 },
+  isord: { width: 1905, height: 1858 },
+  memesupreme: { width: 1905, height: 1905 },
 };
 
 const charactersData = {
@@ -40,15 +34,10 @@ const charactersData = {
   ],
 };
 
-const originalDimensions = {
-  prehisoria: { width: 1905, height: 1701 },
-  isord: {},
-  memesupreme: {},
-};
-
 const useWorldState = (world) => {
-  const [time, setTime] = useState(0);
   const [targetBox, setTargetBox] = useState({
+    oldX: 0,
+    oldY: 0,
     xPos: 0,
     yPos: 0,
     clientWidth: 0,
@@ -70,11 +59,15 @@ const useWorldState = (world) => {
     wrongAnswer: false,
     correctAnswer: { status: false, name: "" },
   });
-  const [gameWon, setGameWon] = useState(false);
+  const { gameWon, setGameWon } = useContext(WinContext);
+
+  // Reset Game Win on component mount
+  useEffect(() => {
+    setGameWon(false);
+  }, []);
 
   // Fetch characters' positions from database
   useEffect(() => {
-    console.log("Called fetch effect");
     fetch(`http://localhost:3000/${world}`, { mode: "cors" })
       .then((response) => {
         if (response.status >= 400) {
@@ -90,19 +83,6 @@ const useWorldState = (world) => {
         console.log(err);
       });
   }, [world]);
-
-  // sets time for every 10 milliseconds
-  useEffect(() => {
-    let interval;
-
-    if (gameWon === false) {
-      interval = setInterval(() => {
-        setTime((count) => count + 1);
-      }, 10);
-    }
-
-    return () => clearInterval(interval);
-  }, [gameWon]);
 
   // Remove feedback popup after timeout
   useEffect(() => {
@@ -128,6 +108,12 @@ const useWorldState = (world) => {
     let y = e.nativeEvent.offsetY;
     let xTargetPos = x;
     let yTargetPos = y;
+
+    setTargetBox({
+      ...targetBox,
+      oldX: x,
+      oldY: y,
+    });
 
     // if both width and height of modal exceeds image edge
     if (x + 190 > width && y + 180 > height) {
@@ -156,12 +142,13 @@ const useWorldState = (world) => {
     // Add width of targeting box to add gap between modal and target box
     x += 40;
 
-    setTargetBox({
+    setTargetBox((prev) => ({
+      ...prev,
       xPos: xTargetPos,
       yPos: yTargetPos,
       clientWidth: width,
       clientHeight: height,
-    });
+    }));
 
     setModal({
       active: true,
@@ -192,11 +179,8 @@ const useWorldState = (world) => {
 
   const isCorrectPosition = (dbCoordinates) => {
     const { positionX, positionY } = dbCoordinates;
-    console.log(positionX, positionY);
-    console.log(modal.xPosition, modal.yPosition);
-
-    const rangeX = Math.abs(positionX - modal.xPosition);
-    const rangeY = Math.abs(positionY - modal.yPosition);
+    const rangeX = Math.abs(positionX - targetBox.oldX);
+    const rangeY = Math.abs(positionY - targetBox.oldY);
 
     if (rangeX <= 25 && rangeY <= 25) {
       return true;
@@ -207,17 +191,11 @@ const useWorldState = (world) => {
 
   const handlePopupClick = (e) => {
     const characterName = e.target.id;
-
     const dbCoordinates = getDatabaseCoordinates(characterName);
     const correctPosition = isCorrectPosition(dbCoordinates);
-    console.log(correctPosition);
 
     // ****** placeholder data replace with real data ********
-    if (
-      data[characterName] === 1 ||
-      data[characterName] === 2 ||
-      data[characterName] === 3
-    ) {
+    if (correctPosition === true) {
       // Adds feedback message
       setFeedBack({
         wrongAnswer: false,
@@ -265,8 +243,7 @@ const useWorldState = (world) => {
     });
   };
 
-  return [
-    time,
+  return {
     targetBox,
     modal,
     characters,
@@ -276,7 +253,7 @@ const useWorldState = (world) => {
     handleImgClick,
     handlePopupClick,
     resetModalState,
-  ];
+  };
 };
 
 export default useWorldState;
