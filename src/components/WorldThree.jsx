@@ -1,46 +1,8 @@
-import PropTypes from "prop-types";
-import Characters from "./Characters";
+import Popup from "./CharactersPopup";
 import Player from "./Player";
 import useWorldState from "./utils/useWorldState";
 
 import Img3 from "../images/memesupreme.jpg";
-
-const Popup = ({
-  characters,
-  targetXPos,
-  targetYPos,
-  modalXPos,
-  modalYPos,
-  handleCharacterClick,
-  handleContainerClick,
-}) => {
-  return (
-    <>
-      <div
-        className="targetBox"
-        style={{
-          top: `${targetYPos}px`,
-          left: `${targetXPos}px`,
-        }}
-      ></div>
-      <div
-        className="popup"
-        style={{
-          top: `${modalYPos}px`,
-          left: `${modalXPos}px`,
-        }}
-        onClick={handleContainerClick}
-      >
-        <div className="characterBox">
-          <Characters
-            charactersData={characters}
-            handleClick={handleCharacterClick}
-          />
-        </div>
-      </div>
-    </>
-  );
-};
 
 const WorldThree = () => {
   const [
@@ -124,16 +86,6 @@ const WorldThree = () => {
       </div>
     </div>
   );
-};
-
-Popup.propTypes = {
-  characters: PropTypes.array,
-  targetXPos: PropTypes.number,
-  targetYPos: PropTypes.number,
-  modalXPos: PropTypes.number,
-  modalYPos: PropTypes.number,
-  handleCharacterClick: PropTypes.func,
-  handleContainerClick: PropTypes.func,
 };
 
 export default WorldThree;
