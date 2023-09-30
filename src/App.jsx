@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Timer from "./components/Timer";
 import Homepage from "./components/Homepage";
@@ -28,10 +28,54 @@ export const WinContext = createContext();
 
 function App() {
   const [gameWon, setGameWon] = useState(false);
+  const [error, setError] = useState({ hasError: false, msg: "" });
   const { name } = useParams();
 
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    let object = {};
+
+    formData.forEach(function (value, key) {
+      object[key] = value;
+    });
+
+    fetch(`http://localhost:3000/leaderboard/${name}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(object),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return Promise.reject(response);
+        }
+
+        navigate("/leaderboard");
+        return response.json();
+      })
+      .catch((err) => {
+        err
+          .json()
+          .then((jsonError) => {
+            setError((prev) => ({
+              ...prev,
+              hasError: true,
+              msg: jsonError.errors,
+            }));
+          })
+          .catch((genericError) => {
+            console.log(err.statusText);
+          });
+      });
+  };
+
   return (
-    <WinContext.Provider value={{ gameWon, setGameWon }}>
+    <WinContext.Provider value={{ gameWon, setGameWon, error, handleSubmit }}>
       <div id="App">
         {name === "prehisoria" ? (
           <>
