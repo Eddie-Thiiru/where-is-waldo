@@ -1,5 +1,5 @@
 import { useState, createContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Timer from "./components/Timer";
 import Homepage from "./components/Homepage";
@@ -8,6 +8,7 @@ import WorldTwo from "./components/WorldTwo";
 import WorldThree from "./components/WorldThree";
 import Characters from "./components/Characters";
 import LeaderboardPage from "./components/LeaderBoardPage";
+import LeaderBoard from "./components/Leaderboard";
 
 // Import character images
 import marioImg from "./images/mario.png";
@@ -30,6 +31,7 @@ function App() {
   const [gameWon, setGameWon] = useState(false);
   const [error, setError] = useState({ hasError: false, msg: "" });
   const { name } = useParams();
+  const { pathname } = useLocation();
 
   const navigate = useNavigate();
 
@@ -78,7 +80,22 @@ function App() {
   return (
     <WinContext.Provider value={{ gameWon, setGameWon, error, handleSubmit }}>
       <div id="App">
-        {name === "prehisoria" ? (
+        {pathname === "/leaderboard/prehisoria" ? (
+          <>
+            <Header></Header>
+            <LeaderBoard world={"prehisoria"} />
+          </>
+        ) : pathname === "/leaderboard/isord" ? (
+          <>
+            <Header></Header>
+            <LeaderBoard world={"isord"} />
+          </>
+        ) : pathname === "/leaderboard/memesupreme" ? (
+          <>
+            <Header></Header>
+            <LeaderBoard world={"memesupreme"} />
+          </>
+        ) : name === "prehisoria" ? (
           <>
             <Header>
               <Characters

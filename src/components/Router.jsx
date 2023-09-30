@@ -8,15 +8,17 @@ const Router = () => {
     {
       path: "/",
       element: <App />,
-      children: [{ path: "home", element: <Homepage /> }],
+      children: [
+        { index: true, element: <Homepage /> },
+        {
+          path: "/leaderboard/:name",
+          element: <LeaderboardPage />,
+        },
+      ],
     },
     {
       path: "/:name",
       element: <App />,
-    },
-    {
-      path: "/leaderboard/:name",
-      element: <LeaderboardPage />,
     },
   ]);
 
