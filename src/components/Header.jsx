@@ -5,7 +5,8 @@ import "../styles/header.css";
 const Header = ({ children }) => {
   return (
     <header className="appHeader">
-      <h1>photoTag</h1>
+      <Link to={"/"}>photoTag</Link>
+
       <div className="headerCharacters">{children}</div>
       <nav>
         <Link to={"/leaderboard"}>Leaderboard</Link>
