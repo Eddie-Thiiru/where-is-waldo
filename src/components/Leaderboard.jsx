@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 const LeaderBoard = () => {
   return (
     <div className="leaderBoard">
@@ -23,10 +25,21 @@ const LeaderBoard = () => {
 };
 
 const LeaderboardPage = () => {
+  const { name } = useParams();
+
   return (
     <div className="leaderboardPage">
-      <h2>All Players</h2>
-      <LeaderBoard />
+      {name === "prehisoria" ? (
+        <div>PREHISTORIA</div>
+      ) : name === "isord" ? (
+        <div>ISORD</div>
+      ) : name === "memesupreme" ? (
+        <div>MEMESUPREME</div>
+      ) : (
+        <div>LEADERBOARD MAIN PAGE</div>
+      )}
+      {/* <h2>All Players</h2>
+      <LeaderBoard /> */}
     </div>
   );
 };

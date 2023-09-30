@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "../App";
 import Homepage from "./Homepage";
+import LeaderboardPage from "./Leaderboard";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -12,6 +13,10 @@ const Router = () => {
     {
       path: "/:name",
       element: <App />,
+    },
+    {
+      path: "/leaderboard/:name",
+      element: <LeaderboardPage />,
     },
   ]);
 

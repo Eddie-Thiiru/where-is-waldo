@@ -35,6 +35,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
 
     let object = {};
@@ -55,7 +56,7 @@ function App() {
           return Promise.reject(response);
         }
 
-        navigate("/leaderboard");
+        navigate(`/leaderboard/${name}`);
         return response.json();
       })
       .catch((err) => {
