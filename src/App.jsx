@@ -7,7 +7,7 @@ import WorldOne from "./components/WorldOne";
 import WorldTwo from "./components/WorldTwo";
 import WorldThree from "./components/WorldThree";
 import Characters from "./components/Characters";
-import LeaderboardPage from "./components/Leaderboard";
+import LeaderboardPage from "./components/LeaderBoardPage";
 
 // Import character images
 import marioImg from "./images/mario.png";
