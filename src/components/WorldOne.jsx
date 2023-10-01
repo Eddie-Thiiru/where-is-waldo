@@ -16,7 +16,7 @@ const WorldOne = () => {
   } = useWorldState("prehisoria");
 
   return (
-    <div className="worldOnePage">
+    <div className="worldPage">
       <div className="worldImgWrapper">
         <img src={worldImg} alt="PrehISOria Image" onClick={handleImgClick} />
 

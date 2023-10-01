@@ -2,21 +2,50 @@
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 100px auto 1fr;
 }
 
-.homepage {
+.timer {
+  padding: 10px;
   display: flex;
+  justify-content: center;
+}
+
+.pageImgContainer {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
+  grid-auto-rows: 1fr;
+  justify-content: center;
 }
 
 .pageImgWrapper {
-  height: 350px;
-  width: 350px;
+  max-height: 450px;
+  padding: 20px;
+  display: grid;
+  grid-template-rows: 1fr 50px;
+  justify-items: center;
+  align-items: center;
+}
+
+h2,
+h3 {
+  padding: 10px;
+}
+
+h4,
+p {
+  padding: 5px;
 }
 
 .pageImgWrapper img {
+  max-height: 100px;
+  min-height: 100%;
   max-width: 100%;
+  min-width: 100%;
   pointer-events: none;
+  object-fit: cover;
 }
 
 .pageImgWrapper h3 {

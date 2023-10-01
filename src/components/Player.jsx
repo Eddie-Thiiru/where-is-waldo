@@ -11,10 +11,9 @@ const Player = ({ time }) => {
     <div className="playerInput">
       <h3>Congratulations!</h3>
       <p>You finished in {`${minutes}:${seconds}s`}</p>
-      <p>Add your score to the leaderboard</p>
       <form onSubmit={handleSubmit}>
         <div className="formScoreGroup">
-          <label htmlFor="playerName">Name</label>
+          <label htmlFor="playerName">Add your name to the leaderboard</label>
           <input type="text" id="playerName" name="playerName" required />
           {error.hasError === true && (
             <span className="errorMsg">{error.msg}</span>

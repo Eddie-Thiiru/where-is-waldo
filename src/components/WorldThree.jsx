@@ -16,7 +16,7 @@ const WorldThree = () => {
   } = useWorldState("memesupreme");
 
   return (
-    <div className="worldThreePage">
+    <div className="worldPage">
       <div className="worldImgWrapper">
         <img src={Img3} alt="memesupreme Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (

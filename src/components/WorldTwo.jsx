@@ -16,7 +16,7 @@ const WorldTwo = () => {
   } = useWorldState("isord");
 
   return (
-    <div className="WorldTwoPage">
+    <div className="WorldPage">
       <div className="worldImgWrapper">
         <img src={Img2} alt="ISOrd & ISOrcery Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (

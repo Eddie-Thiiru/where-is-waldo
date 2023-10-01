@@ -96,8 +96,17 @@ const useWorldState = (world) => {
     return () => clearTimeout(timeout);
   }, [feedback.wrongAnswer, feedback.correctAnswer.status]);
 
+  // Remove target box and modal on window resize
+  useEffect(() => {
+    window.addEventListener("resize", resetModalState);
+
+    return () => {
+      window.removeEventListener("resize", resetModalState);
+    };
+  });
+
   const handleImgClick = (e) => {
-    if (modal.active) {
+    if (modal.active === true) {
       resetModalState();
       return;
     }
@@ -115,32 +124,43 @@ const useWorldState = (world) => {
       oldY: y,
     });
 
-    // if both width and height of modal exceeds image edge
+    // if both width and height of modal exceeds image right and bottom edges
     if (x + 190 > width && y + 180 > height) {
-      x += 40;
-      y += 40;
+      x += 50;
+      y += 25;
     }
 
-    // if width of modal exceeds image edge
+    // if both width and height of modal exceeds image left and top edges
+    if (x - 190 < 0 && y - 180 < 0) {
+      x += 25;
+    }
+
+    // if width of modal exceeds image right edge
     if (x + 190 > width) {
       // Change modal position by subtracting both its width and target box width.
-      x -= 230;
+      x -= 250;
     }
 
-    // if height of modal exceeds image edge
+    // if height of modal exceeds image bottom edge
     if (y + 180 > height) {
       // Change modal position by subtracting both its height and target box height.
-      y -= 220;
-      x -= 40;
+      y -= 230;
+      x -= 50;
+    }
+
+    // if height of modal exceeds image top edge
+    if (y - 180 < 0) {
+      y += 50;
+      x -= 50;
     }
 
     /* Subtract X and Y positions by half of the Target Box's dimensions to
       ensure that the clicked position is centered within the Target Box. */
-    xTargetPos -= 20;
-    yTargetPos -= 20;
+    xTargetPos -= 25;
+    yTargetPos -= 25;
 
     // Add width of targeting box to add gap between modal and target box
-    x += 40;
+    x += 50;
 
     setTargetBox((prev) => ({
       ...prev,

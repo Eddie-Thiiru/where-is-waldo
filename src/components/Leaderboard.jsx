@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import EmptyImg from "../images/emptiness.png";
+import "../styles/leaderboard.css";
 
 const LeaderBoard = ({ world }) => {
   const [players, setPlayers] = useState();
@@ -39,10 +41,10 @@ const LeaderBoard = ({ world }) => {
               <h3>Date</h3>
             </header>
             <section className="leaderBoardContent">
-              <div>Test</div>
               {players.length === 0 ? (
                 <div className="emptyIndicator">
-                  <p>Empty</p>
+                  <img src={EmptyImg} alt="" />
+                  <p>Nothing in Leaderboard</p>
                 </div>
               ) : (
                 players.map((player, index) => {

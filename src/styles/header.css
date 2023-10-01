@@ -1,7 +1,16 @@
 .appHeader {
+  padding: 10px 20px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .headerCharacters {
   display: flex;
+  gap: 5px;
+}
+
+.headerCharacters .character img {
+  height: 55px;
+  width: 55px;
 }
