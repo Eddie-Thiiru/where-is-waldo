@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { format } from "date-fns";
 import EmptyImg from "../images/emptiness.png";
 import "../styles/leaderboard.css";
 
@@ -48,12 +49,26 @@ const LeaderBoard = ({ world }) => {
                 </div>
               ) : (
                 players.map((player, index) => {
+                  let dateFormat = format(
+                    new Date(player.timestamp),
+                    "do MMM yyyy"
+                  );
+                  const minutes = (
+                    "0" + Math.floor((player.scoreTime % 360000) / 6000)
+                  ).slice(-2);
+                  const seconds = (
+                    "0" + Math.floor((player.scoreTime % 6000) / 100)
+                  ).slice(-2);
+                  const milliseconds = ("0" + (player.scoreTime % 100)).slice(
+                    -2
+                  );
+
                   return (
                     <div key={index} className="leaderBoardPlayer">
                       <p>{index + 1}</p>
                       <p>{player.playerName}</p>
-                      <p>{player.scoreTime}</p>
-                      <p>{player.timestamp}</p>
+                      <p>{`${minutes}m ${seconds}s ${milliseconds}ms`}</p>
+                      <p>{dateFormat}</p>
                     </div>
                   );
                 })

@@ -6,11 +6,12 @@ const Player = ({ time }) => {
   const { error, handleSubmit } = useContext(WinContext);
   const minutes = ("0" + Math.floor((time % 360000) / 6000)).slice(-2);
   const seconds = ("0" + Math.floor((time % 6000) / 100)).slice(-2);
+  const milliseconds = ("0" + (time % 100)).slice(-2);
 
   return (
     <div className="playerInput">
       <h3>Congratulations!</h3>
-      <p>You finished in {`${minutes}:${seconds}s`}</p>
+      <p>You finished in {`${minutes}m ${seconds}s ${milliseconds}ms`}</p>
       <form onSubmit={handleSubmit}>
         <div className="formScoreGroup">
           <label htmlFor="playerName">Add your name to the leaderboard</label>
