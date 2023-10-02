@@ -14,15 +14,14 @@
   height: 50px;
   width: 50px;
   position: absolute;
-  border: 2px solid red;
+  border: 3px solid #ff160c;
   border-radius: 50px;
-  background-color: lightblue;
-  opacity: 0.6;
+  background-color: rgba(31, 79, 255, 0.5);
 }
 
 .characterBox {
   width: 150px;
-  background-color: rgba(255, 240, 245, 0.5);
+  background-color: #11171d;
 }
 
 .character {
@@ -41,11 +40,11 @@
 }
 
 .correctAnswerPopup {
-  background-color: green;
+  background-color: #008000;
 }
 
 .wrongAnswerPopup {
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .hidden {
@@ -61,26 +60,26 @@
 .playerInput {
   position: absolute;
   width: 300px;
-  height: 250px;
+  height: max-content;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
   z-index: 1;
-  background-color: lightgreen;
+  background-color: #11171d;
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 form {
   flex: 1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr auto min-content;
 }
 
 .formScoreGroup {
@@ -89,18 +88,32 @@ form {
 }
 
 .addPlayerBtn {
-  margin-top: auto;
+  border: none;
+  color: #ffffff;
+  background-color: #008000;
+  margin-top: 15px;
   padding: 10px 30px;
-  align-self: center;
+  align-self: self-end;
+}
+
+.errorMsg {
+  color: #ee4444;
 }
 
 input {
+  color: #ffffff;
   height: 35px;
+  border: 1px solid #ffffff;
+  background-color: #11171d;
 }
 
 .formScoreGroup:nth-child(1) label {
-  padding: 5px 0px;
+  padding: 10px 0px;
   align-self: center;
+}
+
+.playerInput h3 {
+  font-size: 1.25rem;
 }
 
 form span {
@@ -124,5 +137,9 @@ form span {
 }
 
 .popup .character:hover {
-  background-color: rgba(255, 164, 194, 0.8);
+  background-color: #3d2431;
+}
+
+.addPlayerBtn:hover {
+  background-color: #006700;
 }

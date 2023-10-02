@@ -32,8 +32,11 @@ const LeaderBoard = ({ world }) => {
     <div className="leaderBoardWrapper">
       {loading === false && (
         <>
-          <h2>{world}</h2>
-          <h2>Leaderboard</h2>
+          <h2>
+            {world}
+            <br />
+            Leaderboard
+          </h2>
           <div className="leaderBoard">
             <header className="leaderBoardHeader">
               <h3>Rank</h3>

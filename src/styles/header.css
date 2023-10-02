@@ -14,3 +14,8 @@
   height: 55px;
   width: 55px;
 }
+
+.appHeader > a {
+  font-size: 2rem;
+  font-weight: 700;
+}

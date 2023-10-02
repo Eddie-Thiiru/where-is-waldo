@@ -17,7 +17,7 @@ const Player = ({ time }) => {
           <label htmlFor="playerName">Add your name to the leaderboard</label>
           <input type="text" id="playerName" name="playerName" required />
           {error.hasError === true && (
-            <span className="errorMsg">{error.msg}</span>
+            <span className="errorMsg">*{error.msg}</span>
           )}
         </div>
         <div className="formScoreGroup">

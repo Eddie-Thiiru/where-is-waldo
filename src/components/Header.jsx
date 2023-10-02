@@ -6,7 +6,6 @@ const Header = ({ children }) => {
   return (
     <header className="appHeader">
       <Link to={"/"}>photoTag</Link>
-
       <div className="headerCharacters">{children}</div>
       <nav>
         <Link to={"/leaderboard"}>Leaderboard</Link>

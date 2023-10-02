@@ -13,25 +13,25 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <h2>Worlds</h2>
+      <h2>Game Worlds</h2>
       <div className="pageImgContainer">
         <div
           className="pageImgWrapper"
           onClick={() => handleClick("prehisoria")}
         >
           <img src={Img1} alt=""></img>
-          <h3>PrehISOria</h3>
+          <h3>Prehisoria</h3>
         </div>
         <div className="pageImgWrapper" onClick={() => handleClick("isord")}>
           <img src={Img2} alt=""></img>
-          <h3>ISOrd & ISOrcery</h3>
+          <h3>Isord</h3>
         </div>
         <div
           className="pageImgWrapper"
           onClick={() => handleClick("memesupreme")}
         >
           <img src={Img3} alt=""></img>
-          <h3>Meme Supreme</h3>
+          <h3>Memesupreme</h3>
         </div>
       </div>
     </div>

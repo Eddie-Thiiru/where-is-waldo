@@ -16,25 +16,37 @@ const LeaderboardPage = () => {
   return (
     <div className="leaderboardPage">
       <div className="mainLeaderBoard">
-        <h2>LeaderBoards</h2>
+        <h2>Game Leaderboards</h2>
         <div className="pageImgContainer">
           <div
             className="pageImgWrapper"
             onClick={() => handleClick("prehisoria")}
           >
             <img src={Img1} alt=""></img>
-            <h3>PrehISOria</h3>
+            <h3>
+              Prehisoria
+              <br />
+              Leaderboard
+            </h3>
           </div>
           <div className="pageImgWrapper" onClick={() => handleClick("isord")}>
             <img src={Img2} alt=""></img>
-            <h3>ISOrd & ISOrcery</h3>
+            <h3>
+              Isord
+              <br />
+              Leaderboard
+            </h3>
           </div>
           <div
             className="pageImgWrapper"
             onClick={() => handleClick("memesupreme")}
           >
             <img src={Img3} alt=""></img>
-            <h3>Meme Supreme</h3>
+            <h3>
+              Memesupreme
+              <br />
+              Leaderboard
+            </h3>
           </div>
         </div>
       </div>

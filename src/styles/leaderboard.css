@@ -12,9 +12,12 @@
 }
 
 .leaderBoardHeader {
+  height: 80px;
+  background-color: rgba(31, 79, 255, 0.1);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
+  align-items: center;
 }
 
 .leaderBoardContent {
@@ -30,11 +33,36 @@
 }
 
 .leaderBoardPlayer {
+  min-height: 50px;
+  background-color: rgba(0, 0, 0, 0.06);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
+  align-items: center;
+}
+
+.leaderBoardPlayer:nth-child(2n) {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
+.leaderBoardWrapper h2 {
+  text-align: center;
+}
+
+.leaderBoardWrapper h2::first-letter {
+  text-transform: capitalize;
+}
+
+.leaderBoardPlayer p:nth-child(2) {
+  font-weight: 700;
+  background: linear-gradient(to right, #f772c5, #44bbee);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  word-break: break-all;
+  text-align: center;
 }
 
 .emptyIndicator img {
-  width: 40%;
+  width: 30%;
 }

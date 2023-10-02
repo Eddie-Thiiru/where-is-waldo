@@ -29,6 +29,16 @@
   align-items: center;
 }
 
+.pageImgContainer h3 {
+  color: #6cff64;
+  pointer-events: none;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
 h2,
 h3 {
   padding: 10px;
@@ -48,6 +58,13 @@ p {
   object-fit: cover;
 }
 
-.pageImgWrapper h3 {
-  pointer-events: none;
+a {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4c72ff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1c47e6;
 }
