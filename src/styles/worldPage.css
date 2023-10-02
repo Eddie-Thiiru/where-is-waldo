@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .popup {
@@ -21,13 +22,16 @@
 
 .characterBox {
   width: 150px;
+  border-radius: 5px;
   background-color: #11171d;
 }
 
 .character {
+  border-radius: 5px;
   padding: 5px;
   display: flex;
   align-items: center;
+  transition: background-color 0.1s ease-out;
 }
 
 .correctAnswerPopup,
@@ -35,6 +39,7 @@
   position: fixed;
   top: 20%;
   left: 50%;
+  border-radius: 5px;
   color: white;
   padding: 20px;
 }
@@ -58,16 +63,17 @@
 }
 
 .playerInput {
-  position: absolute;
+  position: fixed;
   width: 300px;
   height: max-content;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
   z-index: 1;
+  border-radius: 5px;
   background-color: #11171d;
+  margin: auto;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -89,11 +95,14 @@ form {
 
 .addPlayerBtn {
   border: none;
+  border-radius: 5px;
+  font-size: 1rem;
   color: #ffffff;
   background-color: #008000;
   margin-top: 15px;
   padding: 10px 30px;
   align-self: self-end;
+  transition: all 0.2s ease-in-out;
 }
 
 .errorMsg {
@@ -101,10 +110,13 @@ form {
 }
 
 input {
-  color: #ffffff;
   height: 35px;
+  font-size: 1rem;
+  color: #ffffff;
   border: 1px solid #ffffff;
+  border-radius: 5px;
   background-color: #11171d;
+  padding: 0px 5px;
 }
 
 .formScoreGroup:nth-child(1) label {
@@ -114,6 +126,7 @@ input {
 
 .playerInput h3 {
   font-size: 1.25rem;
+  color: #00cd00;
 }
 
 form span {
@@ -142,4 +155,9 @@ form span {
 
 .addPlayerBtn:hover {
   background-color: #006700;
+}
+
+input:focus {
+  border: none;
+  outline-color: #00cd00;
 }

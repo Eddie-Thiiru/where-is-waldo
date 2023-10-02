@@ -58,6 +58,7 @@ function App() {
           return Promise.reject(response);
         }
 
+        setGameWon(false);
         navigate(`/leaderboard/${name}`);
         return response.json();
       })
@@ -77,9 +78,11 @@ function App() {
       });
   };
 
+  const modalClassName = gameWon === true ? "modalOpen" : "";
+
   return (
     <WinContext.Provider value={{ gameWon, setGameWon, error, handleSubmit }}>
-      <div id="App">
+      <div id="App" className={modalClassName}>
         {pathname === "/leaderboard/prehisoria" ? (
           <>
             <Header></Header>

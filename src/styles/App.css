@@ -7,6 +7,21 @@
   grid-template-rows: 100px auto 1fr;
 }
 
+#App.modalOpen {
+  pointer-events: none;
+}
+
+#App.modalOpen .appHeader,
+#App.modalOpen .timer > p,
+#App.modalOpen .worldPage {
+  opacity: 0.5;
+}
+
+#App.modalOpen .playerInput {
+  pointer-events: auto;
+  opacity: 1;
+}
+
 .timer {
   padding: 10px;
   display: flex;
@@ -29,6 +44,8 @@
   grid-template-rows: 1fr 50px;
   justify-items: center;
   align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease-in-out;
 }
 
 .pageImgContainer h3 {
@@ -57,6 +74,7 @@ p {
   min-height: 100%;
   max-width: 100%;
   min-width: 100%;
+  border-radius: 5px;
   pointer-events: none;
   object-fit: cover;
 }
@@ -66,6 +84,12 @@ a {
   font-weight: 600;
   color: #4c72ff;
   text-decoration: none;
+  transition: color 0.2s ease-out;
+}
+
+.pageImgWrapper:hover {
+  filter: brightness(1.2);
+  transform: scale(1.1);
 }
 
 a:hover {
