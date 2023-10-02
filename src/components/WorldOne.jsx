@@ -2,6 +2,7 @@ import Popup from "./CharactersPopup";
 import useWorldState from "./utils/useWorldState";
 
 import worldImg from "../images/PrehISOria.png";
+import markerImg from "../images/marker.svg";
 
 const WorldOne = () => {
   const {
@@ -49,7 +50,7 @@ const WorldOne = () => {
             left: `${marker[1].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
         <div
           className={marker[2].status}
@@ -58,7 +59,7 @@ const WorldOne = () => {
             left: `${marker[2].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
         <div
           className={marker[3].status}
@@ -67,7 +68,7 @@ const WorldOne = () => {
             left: `${marker[3].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
       </div>
     </div>

@@ -56,7 +56,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   word-break: break-all;
-  text-align: center;
 }
 
 .emptyIndicator img {

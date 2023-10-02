@@ -2,6 +2,7 @@ import Popup from "./CharactersPopup";
 import useWorldState from "./utils/useWorldState";
 
 import Img2 from "../images/ISOrd & ISOrcery.png";
+import markerImg from "../images/marker.svg";
 
 const WorldTwo = () => {
   const {
@@ -16,7 +17,7 @@ const WorldTwo = () => {
   } = useWorldState("isord");
 
   return (
-    <div className="WorldPage">
+    <div className="worldPage">
       <div className="worldImgWrapper">
         <img src={Img2} alt="ISOrd & ISOrcery Image" onClick={handleImgClick} />
         {feedback.wrongAnswer === true ? (
@@ -48,7 +49,7 @@ const WorldTwo = () => {
             left: `${marker[1].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
         <div
           className={marker[2].status}
@@ -57,7 +58,7 @@ const WorldTwo = () => {
             left: `${marker[2].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
         <div
           className={marker[3].status}
@@ -66,7 +67,7 @@ const WorldTwo = () => {
             left: `${marker[3].xPosition}px`,
           }}
         >
-          Here
+          <img src={markerImg} alt="marker" />
         </div>
       </div>
     </div>

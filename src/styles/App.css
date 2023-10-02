@@ -5,6 +5,7 @@
   width: 100%;
   display: grid;
   grid-template-rows: 100px auto 1fr;
+  text-align: center;
 }
 
 #App.modalOpen {
@@ -60,7 +61,6 @@ h2 {
 
 h2,
 h3 {
-  text-align: center;
   padding: 10px;
 }
 
@@ -94,4 +94,10 @@ a {
 
 a:hover {
   color: #1c47e6;
+}
+
+@media (max-width: 800px) {
+  a {
+    font-size: 1rem;
+  }
 }

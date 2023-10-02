@@ -78,7 +78,13 @@ function App() {
       });
   };
 
-  const modalClassName = gameWon === true ? "modalOpen" : "";
+  let modalClassName;
+
+  if (name === "prehisoria" || name === "isord" || name === "memesupreme") {
+    modalClassName = gameWon === true ? "modalOpen" : "";
+  } else {
+    modalClassName = "";
+  }
 
   return (
     <WinContext.Provider value={{ gameWon, setGameWon, error, handleSubmit }}>

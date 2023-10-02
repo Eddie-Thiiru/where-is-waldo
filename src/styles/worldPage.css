@@ -144,6 +144,11 @@ form span {
   object-fit: contain;
 }
 
+.visible img {
+  height: 30px;
+  width: 30px;
+}
+
 .popup img,
 .popup h4 {
   pointer-events: none;

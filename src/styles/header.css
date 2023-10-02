@@ -19,3 +19,33 @@
   font-family: "Raleway", sans-serif;
   font-size: 2rem;
 }
+
+@media (max-width: 800px) {
+  .headerCharacters .character img {
+    height: 40px;
+    width: 40px;
+  }
+
+  .appHeader > a {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .headerCharacters .character img {
+    height: 25px;
+    width: 25px;
+  }
+
+  .appHeader > a {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 0.875rem;
+  }
+}
