@@ -9,7 +9,7 @@ const LeaderBoard = ({ world }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/leaderboard/${world}`, {
+    fetch(`https://photo-tag-api.fly.dev/leaderboard/${world}`, {
       method: "GET",
     })
       .then((response) => {

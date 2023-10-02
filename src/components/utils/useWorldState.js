@@ -68,7 +68,7 @@ const useWorldState = (world) => {
 
   // Fetch characters' positions from database
   useEffect(() => {
-    fetch(`http://localhost:3000/${world}`, { mode: "cors" })
+    fetch(`https://photo-tag-api.fly.dev/${world}`, { mode: "cors" })
       .then((response) => {
         if (response.status >= 400) {
           throw new Error("Server error");

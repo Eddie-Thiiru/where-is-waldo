@@ -46,7 +46,7 @@ function App() {
       object[key] = value;
     });
 
-    fetch(`http://localhost:3000/leaderboard/${name}`, {
+    fetch(`https://photo-tag-api.fly.dev/leaderboard/${name}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
