@@ -37,8 +37,12 @@
 .correctAnswerPopup,
 .wrongAnswerPopup {
   position: fixed;
-  top: 20%;
-  left: 50%;
+  height: max-content;
+  width: max-content;
+  top: 170px;
+  left: 0;
+  right: 0;
+  margin: auto;
   border-radius: 5px;
   color: white;
   padding: 20px;
@@ -165,4 +169,26 @@ form span {
 input:focus {
   border: none;
   outline-color: #00cd00;
+}
+
+@media (max-width: 600px) {
+  .targetBox,
+  .popup,
+  .visible,
+  .correctAnswerPopup,
+  .wrongAnswerPopup,
+  .playerInput {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 450px) {
+  .targetBox,
+  .popup,
+  .visible,
+  .correctAnswerPopup,
+  .wrongAnswerPopup,
+  .playerInput {
+    transform: scale(0.6);
+  }
 }

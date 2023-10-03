@@ -87,6 +87,42 @@ a {
   transition: color 0.2s ease-out;
 }
 
+@media (max-width: 800px) {
+  a {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.0625rem;
+    padding: 3px;
+  }
+
+  h4 {
+    font-size: 0.875rem;
+  }
+
+  h3,
+  h4,
+  p {
+    padding: 3px;
+  }
+}
+
+@media (max-width: 450px) {
+  h4 {
+    font-size: 0.75rem;
+  }
+
+  p,
+  a {
+    font-size: 0.875rem;
+  }
+}
+
 .pageImgWrapper:hover {
   filter: brightness(1.2);
   transform: scale(1.1);
@@ -94,10 +130,4 @@ a {
 
 a:hover {
   color: #1c47e6;
-}
-
-@media (max-width: 800px) {
-  a {
-    font-size: 1rem;
-  }
 }
