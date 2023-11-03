@@ -2,7 +2,9 @@
 
 From The Odin Project's curriculum. A Photo Tagging game where your goal is to find all the hidden characters.
 
-[Live Demo](https://photo-tag-find.netlify.app/) :point_left:
+[Live Demo](https://photo-tag-find.netlify.app/) 🚀:
+
+[Backend](https://github.com/Eddie-Thiiru/photo-tag-API) 👈
 
 # Built With
 
